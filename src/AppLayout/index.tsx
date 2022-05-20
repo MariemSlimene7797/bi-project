@@ -12,17 +12,17 @@ interface AppLayoutProps {}
 
 const AppLayout: React.FC<AppLayoutProps> = () => {
   return (
-    <React.Suspense fallback={<Spinner />}>
-      <Router>
-        <Layout style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
-          <LayoutHeader />
+    <Router>
+      <Layout style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
+        <LayoutHeader />
+        <React.Suspense fallback={<Spinner />}>
           <LayoutContent>
             <Navigation />
           </LayoutContent>
-          <LayoutFooter />
-        </Layout>
-      </Router>
-    </React.Suspense>
+        </React.Suspense>
+        <LayoutFooter />
+      </Layout>
+    </Router>
   );
 };
 

@@ -1,14 +1,15 @@
 import React from 'react';
 
+export type pathGroup = '/Dashboard' | '/Reporting' | '/Settings';
 type RouteType = {
-  path: string;
+  path: pathGroup;
   exact?: boolean;
   component: React.FC;
 };
 
 const routes: RouteType[] = [
   {
-    path: '/',
+    path: '/Dashboard',
     exact: true,
     component: React.lazy(() => import('../pages/Dashboard'))
   },

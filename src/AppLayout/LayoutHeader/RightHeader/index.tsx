@@ -9,9 +9,22 @@ const RightHeader: React.FC<RightHeaderProps> = () => {
   return (
     //<div style={{ width: "fit-content" }}>
     <Menu mode="horizontal" theme="dark" style={{ width: 'fit-content' }}>
-      <Menu.Item key="Profil" title="Profil" icon={<UserOutlined />}>
-        Profil
-      </Menu.Item>
+      <Menu.SubMenu key="SubMenu" title="Profile" icon={<UserOutlined />} style={{ minWidth: '100px' }}>
+        <Menu.Item key="two" icon={<AppstoreOutlined />}>
+          Navigation Two
+        </Menu.Item>
+        <Menu.Item key="three" icon={<AppstoreOutlined />}>
+          Navigation Three
+        </Menu.Item>
+        <Menu.ItemGroup title="Item Group">
+          <Menu.Item key="four" icon={<AppstoreOutlined />}>
+            Navigation Four
+          </Menu.Item>
+          <Menu.Item key="five" icon={<AppstoreOutlined />}>
+            Navigation Five
+          </Menu.Item>
+        </Menu.ItemGroup>
+      </Menu.SubMenu>
     </Menu>
   );
 };
