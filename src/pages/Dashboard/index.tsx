@@ -1,12 +1,12 @@
 import React from 'react';
-import Sider from "./Sider"
-interface DashboardProps {}
+import Sider from './Sider';
 
-const Dashboard: React.FC<DashboardProps> = () => {
-
-      return <>
-      <Sider/>
-      </>;
+const Dashboard: React.FC = () => {
+  return (
+    <>
+      <Sider />
+    </>
+  );
 };
 
 export default Dashboard;

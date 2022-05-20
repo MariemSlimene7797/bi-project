@@ -1,31 +1,36 @@
-import { Menu } from "antd";
-import React from "react";
-import { AppstoreOutlined, SettingOutlined ,UserOutlined ,LineChartOutlined,FileTextOutlined,
-      MenuOutlined  } from '@ant-design/icons';
+import { Menu } from 'antd';
+import React from 'react';
+import {
+  AppstoreOutlined,
+  SettingOutlined,
+  UserOutlined,
+  LineChartOutlined,
+  FileTextOutlined,
+  MenuOutlined
+} from '@ant-design/icons';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface LeftHeaderProps {}
 
 const LeftHeader: React.FC<LeftHeaderProps> = () => {
   //return (
   //  <div style={{ width: "100%" }}>
-  return(
+  return (
+    <Menu mode="horizontal" defaultSelectedKeys={[]} theme="dark" style={{ width: '100%' }}>
+      <Menu.Item key="menu" icon={<MenuOutlined />}></Menu.Item>
 
-<Menu mode="horizontal" defaultSelectedKeys={[]} theme="dark" style={{width:"100%"}}>
-          
-          <Menu.Item key="menu" icon={<MenuOutlined />}></Menu.Item>
-  
-          <Menu.Item key="report" icon={<FileTextOutlined />}>
-                  Reporting
-          </Menu.Item>
-          <Menu.Item key="dashboard" icon={<LineChartOutlined />}>
-            Dashboard
-          </Menu.Item>
-          <Menu.Item key="Settings" icon={<SettingOutlined />}>
-            Settings
-          </Menu.Item>
-          </Menu>
- 
-)};
+      <Menu.Item key="report" icon={<FileTextOutlined />}>
+        Reporting
+      </Menu.Item>
+      <Menu.Item key="dashboard" icon={<LineChartOutlined />}>
+        Dashboard
+      </Menu.Item>
+      <Menu.Item key="Settings" icon={<SettingOutlined />}>
+        Settings
+      </Menu.Item>
+    </Menu>
+  );
+};
 
 export default LeftHeader;
 /* </Menu>
