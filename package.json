@@ -5,10 +5,15 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@craco/craco": "^6.4.3",
+    "@tolgee/i18next": "^4.5.0",
     "antd": "^4.20.5",
     "craco-antd": "^2.0.0",
+    "i18next": "^21.8.3",
+    "i18next-icu": "^2.0.3",
+    "intl-messageformat": "^10.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-i18next": "^11.16.9",
     "react-router-dom": "^5.3.3",
     "react-scripts": "5.0.1",
     "typescript": "^4.6.4"
@@ -20,10 +25,13 @@
     "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "@typescript-eslint/parser": "^5.25.0",
+    "child_process": "^1.0.2",
+    "dotenv": "^16.0.1",
     "eslint": "^8.15.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.30.0",
+    "extract-zip": "^2.0.1",
     "install": "^0.13.0",
     "less": "^4.1.2",
     "less-loader": "^11.0.0",
@@ -32,6 +40,7 @@
   },
   "scripts": {
     "start": "nodemon -w ./src/theme.less --exec \"craco start\"",
+    "prebuild": "node sync_i18n_Dictionnary.js",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"

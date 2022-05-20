@@ -1,5 +1,4 @@
 import { Layout } from 'antd';
-import Sider from 'antd/lib/layout/Sider';
 import React from 'react';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
