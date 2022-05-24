@@ -1,5 +1,7 @@
 import React from 'react';
-import { Card } from 'antd';
+import { Card, Button } from 'antd';
+import './index.css';
+import { PlusCircleOutlined } from '@ant-design/icons';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface SiderItemProps {}
@@ -7,7 +9,12 @@ interface SiderItemProps {}
 const SiderItem: React.FC<SiderItemProps> = () => {
   return (
     <Card hoverable={true} style={CardStyle}>
-      <p style={{ textAlign: 'center' }}>Card Content</p>
+      <div>
+        <p className="cardStyle" style={{ textAlign: 'center' }}>
+          Card Content
+        </p>
+        <Button className="button" type="dashed" size="large" icon={<PlusCircleOutlined />} />
+      </div>
     </Card>
   );
 };
