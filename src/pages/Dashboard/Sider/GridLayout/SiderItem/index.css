@@ -1,6 +1,7 @@
 .button{
     display:none; 
     font-size: large;
+    border:none;
     
    }
    .cardStyle{
