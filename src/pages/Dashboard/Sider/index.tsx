@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Layout, Menu, Breadcrumb, Modal, Input } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import {
+  UserOutlined,
+  LaptopOutlined,
+  NotificationOutlined,
+  MenuUnfoldOutlined,
+  MenuFoldOutlined
+} from '@ant-design/icons';
 import GridLayout from './GridLayout';
 import { wrap } from 'module';
 import SiderItem from './GridLayout/SiderItem';
+import { LayoutContext } from '../../../contexts/LayoutContext';
 
 interface SiderProps {
   onAdd: (el: string) => void;
 }
 const Sider: React.FC<SiderProps> = ({ onAdd }) => {
+  const { collapsed } = useContext(LayoutContext);
   const [isVisible, setIsVisible] = useState<boolean>(false);
+
   const [selectedItem, setSelectedItem] = useState<string>('');
   const handleClick = () => {
     setIsVisible(true);
@@ -21,9 +30,17 @@ const Sider: React.FC<SiderProps> = ({ onAdd }) => {
   const handleCancel = () => {
     setIsVisible(false);
   };
+
   return (
     <Layout style={{ height: 800 }}>
-      <Layout.Sider className="name-sider" width={300} theme="light">
+      <Layout.Sider
+        className="name-sider"
+        style={siderStyle}
+        theme="light"
+        trigger={null}
+        collapsible
+        collapsed={collapsed}
+      >
         <SiderItem onClick={() => handleClick()} />
         <SiderItem onClick={() => handleClick()} />
         <SiderItem onClick={() => handleClick()} />
@@ -36,4 +53,5 @@ const Sider: React.FC<SiderProps> = ({ onAdd }) => {
 };
 
 export default Sider;
+const siderStyle: React.CSSProperties = { maxWidth: '300px', minWidth: '50px' };
 // <GridLayout></GridLayout>

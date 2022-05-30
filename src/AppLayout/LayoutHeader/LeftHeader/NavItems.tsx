@@ -11,16 +11,16 @@ type NavItemType = {
 
 const NavItem: NavItemType[] = [
   {
-    key: 'report',
-    icon: <FileTextOutlined />,
-    path: '/Reporting',
-    label: 'Reporting'
-  },
-  {
     key: 'dashboard',
     icon: <LineChartOutlined />,
     path: '/Dashboard',
     label: 'Dashboard'
+  },
+  {
+    key: 'report',
+    icon: <FileTextOutlined />,
+    path: '/Reporting',
+    label: 'Reporting'
   },
   {
     key: 'settings',
