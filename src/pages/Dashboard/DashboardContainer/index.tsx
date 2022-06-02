@@ -8,6 +8,9 @@ interface DashboardContainerProps {}
 
 const DashboardContainer: React.FC<DashboardContainerProps> = () => {
   const { dashboardElements } = useContext(ToolBoxContext);
+  /*const ModalTitle={dashboardElements.map((el, key) => 
+    <div key={key}>{el.title}</div>)};*/
+
   return <></>;
 };
 
