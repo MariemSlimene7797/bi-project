@@ -15,7 +15,7 @@ const LeftHeader: React.FC = () => {
   const [hovered, setHovered] = useState<boolean>(false);
 
   return (
-    <Menu mode="horizontal" defaultSelectedKeys={[]} theme="dark" style={{ width: '100%' }}>
+    <>
       <div
         onMouseLeave={() => setHovered(false)}
         onMouseEnter={() => setHovered(true)}
@@ -24,17 +24,19 @@ const LeftHeader: React.FC = () => {
       >
         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </div>
-      {Menuitem.map((el, key) => (
-        <Menu.Item
-          key={key}
-          icon={el.icon}
-          onClick={() => history.push(el.path)}
-          style={{ fontSize: '15px', color: 'white' }}
-        >
-          {el.label}
-        </Menu.Item>
-      ))}
-    </Menu>
+      <Menu mode="horizontal" defaultSelectedKeys={[]} theme="dark" style={{ width: '100%' }}>
+        {Menuitem.map((el, key) => (
+          <Menu.Item
+            key={key}
+            icon={el.icon}
+            onClick={() => history.push(el.path)}
+            style={{ fontSize: '15px', color: 'white' }}
+          >
+            {el.label}
+          </Menu.Item>
+        ))}
+      </Menu>
+    </>
   );
 };
 

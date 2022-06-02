@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
+import React, { CSSProperties, useContext } from 'react';
+import { ToolBoxContext } from '../../contexts/ToolBoxContext';
+import DashboardContainer from './DashboardContainer';
 import Sider from './Sider';
 
 const Dashboard: React.FC = () => {
-  const [dashboardElements, setDashboardEelements] = useState<string[]>([]);
   return (
-    <div style={{ display: 'flex' }}>
-      <Sider onAdd={(el) => setDashboardEelements([...dashboardElements, el])} />
+    <div style={DashboardContainerStyle}>
       <div>
-        {dashboardElements.map((el, key) => (
-          <span key={key}>{el}</span>
-        ))}
+        <Sider />
+      </div>
+      <div>
+        <DashboardContainer />
       </div>
     </div>
   );
 };
 
 export default Dashboard;
+
+const DashboardContainerStyle: CSSProperties = {
+  display: 'flex',
+  flexDirection: 'row'
+};

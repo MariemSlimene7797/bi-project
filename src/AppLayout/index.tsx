@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { Layout } from 'antd';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Navigation from '../Route';
@@ -13,7 +13,7 @@ interface AppLayoutProps {}
 const AppLayout: React.FC<AppLayoutProps> = () => {
   return (
     <Router>
-      <Layout style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
+      <Layout style={LayoutStyles}>
         <LayoutHeader />
         <React.Suspense fallback={<Spinner />}>
           <LayoutContent>
@@ -27,3 +27,11 @@ const AppLayout: React.FC<AppLayoutProps> = () => {
 };
 
 export default AppLayout;
+
+const LayoutStyles: CSSProperties = {
+  width: '100vw',
+  height: '100vh',
+  overflow: 'hidden',
+  display: 'flex',
+  flexDirection: 'column'
+};
