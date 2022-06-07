@@ -23,7 +23,7 @@ const toolboxElements = [
   }
 ];
 const Sider: React.FC = () => {
-  const { AddDashboardElement } = useContext(ToolBoxContext);
+  const { AddDashboardElement, DeleteDashboardElement, dashboardElements } = useContext(ToolBoxContext);
   const { collapsed } = useContext(LayoutContext);
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
@@ -32,6 +32,7 @@ const Sider: React.FC = () => {
   const handleOk = () => {
     setIsVisible(false);
     AddDashboardElement(selectedItem);
+    console.log(selectedItem);
   };
   const handleCancel = () => {
     setIsVisible(false);

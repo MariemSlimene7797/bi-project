@@ -41,6 +41,7 @@ const ToolBoxContextProvider: React.FC = ({ children }) => {
     setDashboardElements([...dashboardElements, el]);
   };
   const DeleteDashboardElement = (el: DashboardElementsType) => {
+    //
     setDashboardElements(dashboardElements.filter((_el) => _el.id !== el.id));
   };
   const AddToolboxElement = (el: ToolboxElementsType) => {
