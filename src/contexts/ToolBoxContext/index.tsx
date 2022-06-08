@@ -11,27 +11,27 @@ interface IToolBoxContext {
   DeleteToolboxElement: (el: ToolboxElementsType) => void;
 }
 
+const ElementsType = ['Bar', 'Pie'] as const;
+export type Tool = typeof ElementsType[number];
+
 export type DashboardElementsType = {
   id: number;
   title: string;
-  type: 'A' | 'B';
+  type: Tool;
 };
 
 // how to extend a type in typescript ItemType
 export type ToolboxElementsType = {
   id: number;
   title: string;
+  type: Tool;
 };
 // export type ItemType = ToolboxElementsType & {};
 
 // delete these elements after implementation of add tbox elements
 export const TBOX_ELEMENTS: ToolboxElementsType[] = [
-  { id: 0, title: 'Component1' },
-  { id: 1, title: 'Component2' },
-  { id: 2, title: 'Component3' },
-  { id: 3, title: 'Component4' },
-  { id: 4, title: 'Component5' },
-  { id: 5, title: 'Component6' }
+  { id: 0, title: 'Pie Chart', type: 'Pie' },
+  { id: 1, title: 'Bar Chart', type: 'Bar' }
 ];
 export const ToolBoxContext = createContext<IToolBoxContext>({} as IToolBoxContext);
 const ToolBoxContextProvider: React.FC = ({ children }) => {
@@ -41,7 +41,6 @@ const ToolBoxContextProvider: React.FC = ({ children }) => {
     setDashboardElements([...dashboardElements, el]);
   };
   const DeleteDashboardElement = (el: DashboardElementsType) => {
-    //
     setDashboardElements(dashboardElements.filter((_el) => _el.id !== el.id));
   };
   const AddToolboxElement = (el: ToolboxElementsType) => {

@@ -1,35 +1,41 @@
 import React, { useContext, useState } from 'react';
 import { Layout, Modal, Input, Select, Menu, Card } from 'antd';
 import { LayoutContext } from '../../../contexts/LayoutContext';
-import { DashboardElementsType, ToolBoxContext } from '../../../contexts/ToolBoxContext';
-
-import { UserOutlined, VideoCameraOutlined, UploadOutlined } from '@ant-design/icons';
+import { DashboardElementsType, ToolBoxContext, ToolboxElementsType } from '../../../contexts/ToolBoxContext';
+import {
+  UserOutlined,
+  VideoCameraOutlined,
+  UploadOutlined,
+  PieChartOutlined,
+  BarChartOutlined
+} from '@ant-design/icons';
+import { ModalSiderContext } from '../../../contexts/ModalSiderContext';
+import { PieChart } from 'recharts';
+import PieModal from './PieModal';
+import BarModal from './BarModal';
 
 const toolboxElements = [
   {
     key: '1',
-    icon: <UserOutlined />,
-    label: 'nav 1'
+    icon: <PieChartOutlined />,
+    label: 'Pie Chart'
   },
   {
     key: '2',
-    icon: <VideoCameraOutlined />,
-    label: 'nav 2'
-  },
-  {
-    key: '3',
-    icon: <UploadOutlined />,
-    label: 'nav 3'
+    icon: <BarChartOutlined />,
+    label: 'Bar Chart'
   }
 ];
+
 const Sider: React.FC = () => {
   const { AddDashboardElement, DeleteDashboardElement, dashboardElements } = useContext(ToolBoxContext);
   const { collapsed } = useContext(LayoutContext);
-  const [isVisible, setIsVisible] = useState<boolean>(false);
 
-  const [selectedItem, setSelectedItem] = useState<DashboardElementsType>({} as DashboardElementsType);
+  const { selectedItem } = useContext(ModalSiderContext);
+  const { handleOpen, handleClick } = useContext(ModalSiderContext);
 
-  const handleOk = () => {
+  // const { handleCancel } = useContext(ModalSiderContext);
+  /* const handleOk = () => {
     setIsVisible(false);
     AddDashboardElement(selectedItem);
     console.log(selectedItem);
@@ -42,7 +48,7 @@ const Sider: React.FC = () => {
     console.log(elKey);
     setSelectedItem({} as DashboardElementsType);
     setIsVisible(true);
-  };
+  };*/
   return (
     <>
       <Layout.Sider style={siderStyle} theme="light" trigger={null} collapsible collapsed={collapsed}>
@@ -55,26 +61,10 @@ const Sider: React.FC = () => {
           selectable={false}
           items={toolboxElements}
           style={SiderItemStyle}
-          onClick={(info) => handleOpen(info.key)}
+          onClick={handleClick}
         />
       </Layout.Sider>
-      <Modal title="Choose an object" visible={isVisible} onOk={handleOk} onCancel={handleCancel}>
-        <Input
-          placeholder="Enter object title"
-          type="text"
-          className="title"
-          value={selectedItem.title || ''}
-          onChange={(e) => setSelectedItem({ ...selectedItem, title: e.target.value.toString() })}
-        />
-        <Select
-          value={selectedItem.type || ''}
-          style={{ width: 80, margin: '0 8px' }}
-          onChange={(e) => setSelectedItem({ ...selectedItem, type: e })}
-        >
-          <Select.Option value="A">A</Select.Option>
-          <Select.Option value="B">B</Select.Option>
-        </Select>
-      </Modal>
+      {selectedItem.type == 'Bar' ? <BarModal /> : <PieModal />}
     </>
   );
 };
