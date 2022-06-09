@@ -1,30 +1,21 @@
-import { Input, Modal, Select } from 'antd';
-import React, { useContext, useState } from 'react';
-import { PieChart } from 'recharts';
+import { Input, Modal } from 'antd';
+import React, { useContext } from 'react';
 import { ModalSiderContext } from '../../../contexts/ModalSiderContext';
-import { ToolBoxContext, DashboardElementsType } from '../../../contexts/ToolBoxContext';
-import PieChartTool from '../DashboardContainer/PieChartTool';
+import { ToolboxElementType } from '../../../contexts/ToolBoxContext';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface PieModalProps {}
+interface PieModalProps {
+  isVisible: boolean;
+  item: ToolboxElementType;
+}
 
-const PieModal: React.FC<PieModalProps> = () => {
-  const { AddDashboardElement, DeleteDashboardElement, dashboardElements } = useContext(ToolBoxContext);
-  const { isVisible } = useContext(ModalSiderContext);
-
-  const { selectedItem } = useContext(ModalSiderContext);
-  const { handleOk, handleCancel, handleOpen, handleSelectionPie, handleClick } = useContext(ModalSiderContext);
+const PieModal: React.FC<PieModalProps> = ({ isVisible, item }) => {
+  const { handleOk, handleCancel, handleSelectionPie } = useContext(ModalSiderContext);
 
   return (
     <>
-      <Modal title="Title of Pie Chart" visible={isVisible} onOk={handleOk} onCancel={handleCancel}>
-        <Input
-          placeholder="Enter object title"
-          type="text"
-          className="title"
-          value={selectedItem.title || ''}
-          onChange={handleSelectionPie}
-        />
+      <Modal title="Pie Form" visible={isVisible} onOk={handleOk} onCancel={handleCancel}>
+        <Input placeholder="Enter object title" type="text" className="title" onChange={handleSelectionPie} />
       </Modal>
     </>
   );

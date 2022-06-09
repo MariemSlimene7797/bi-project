@@ -1,53 +1,52 @@
+import { BarChartOutlined, PieChartOutlined } from '@ant-design/icons';
+import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import React, { createContext, useState } from 'react';
 
 interface IToolBoxContext {
   // dashboard
-  dashboardElements: DashboardElementsType[];
-  AddDashboardElement: (el: DashboardElementsType) => void;
-  DeleteDashboardElement: (el: DashboardElementsType) => void;
+  dashboardElements: DashboardElementType[];
+  AddDashboardElement: (el: DashboardElementType) => void;
+  DeleteDashboardElement: (el: DashboardElementType) => void;
   // toolbox
-  toolboxElements: ToolboxElementsType[];
-  AddToolboxElement: (el: ToolboxElementsType) => void;
-  DeleteToolboxElement: (el: ToolboxElementsType) => void;
+  toolboxElements: ToolboxElementType[];
+  AddToolboxElement: (el: ToolboxElementType) => void;
+  DeleteToolboxElement: (el: ToolboxElementType) => void;
 }
 
-const ElementsType = ['Bar', 'Pie'] as const;
-export type Tool = typeof ElementsType[number];
+const ElementType = ['Bar', 'Pie'] as const;
+export type Tool = typeof ElementType[number];
 
-export type DashboardElementsType = {
-  id: number;
+export type DashboardElementType = {
+  id: React.Key;
   title: string;
   type: Tool;
 };
 
 // how to extend a type in typescript ItemType
-export type ToolboxElementsType = {
-  id: number;
-  title: string;
+export type ToolboxElementType = ItemType & {
   type: Tool;
 };
-// export type ItemType = ToolboxElementsType & {};
 
 // delete these elements after implementation of add tbox elements
-export const TBOX_ELEMENTS: ToolboxElementsType[] = [
-  { id: 0, title: 'Pie Chart', type: 'Pie' },
-  { id: 1, title: 'Bar Chart', type: 'Bar' }
+const TBOX_ELEMENTS: ToolboxElementType[] = [
+  { key: '0', icon: <PieChartOutlined />, label: 'Pie Chart', type: 'Pie' },
+  { key: '1', icon: <BarChartOutlined />, label: 'Bar Chart', type: 'Bar' }
 ];
 export const ToolBoxContext = createContext<IToolBoxContext>({} as IToolBoxContext);
 const ToolBoxContextProvider: React.FC = ({ children }) => {
-  const [dashboardElements, setDashboardElements] = useState<DashboardElementsType[]>([]);
-  const [toolboxElements, setToolboxElements] = useState<ToolboxElementsType[]>(TBOX_ELEMENTS);
-  const AddDashboardElement = (el: DashboardElementsType) => {
+  const [dashboardElements, setDashboardElements] = useState<DashboardElementType[]>([]);
+  const [toolboxElements, setToolboxElements] = useState<ToolboxElementType[]>(TBOX_ELEMENTS);
+  const AddDashboardElement = (el: DashboardElementType) => {
     setDashboardElements([...dashboardElements, el]);
   };
-  const DeleteDashboardElement = (el: DashboardElementsType) => {
+  const DeleteDashboardElement = (el: DashboardElementType) => {
     setDashboardElements(dashboardElements.filter((_el) => _el.id !== el.id));
   };
-  const AddToolboxElement = (el: ToolboxElementsType) => {
+  const AddToolboxElement = (el: ToolboxElementType) => {
     setToolboxElements([...toolboxElements, el]);
   };
-  const DeleteToolboxElement = (el: ToolboxElementsType) => {
-    setToolboxElements(toolboxElements.filter((_el) => _el.id !== el.id));
+  const DeleteToolboxElement = (el: ToolboxElementType) => {
+    setToolboxElements(toolboxElements.filter((_el) => _el.key !== el.key));
   };
 
   return (

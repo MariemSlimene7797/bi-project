@@ -1,39 +1,17 @@
 import React, { useContext, useState } from 'react';
-import { Layout, Modal, Input, Select, Menu, Card } from 'antd';
+import { Layout, Menu, message } from 'antd';
 import { LayoutContext } from '../../../contexts/LayoutContext';
-import { DashboardElementsType, ToolBoxContext, ToolboxElementsType } from '../../../contexts/ToolBoxContext';
-import {
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  PieChartOutlined,
-  BarChartOutlined
-} from '@ant-design/icons';
-import { ModalSiderContext } from '../../../contexts/ModalSiderContext';
-import { PieChart } from 'recharts';
 import PieModal from './PieModal';
 import BarModal from './BarModal';
-
-const toolboxElements = [
-  {
-    key: '1',
-    icon: <PieChartOutlined />,
-    label: 'Pie Chart'
-  },
-  {
-    key: '2',
-    icon: <BarChartOutlined />,
-    label: 'Bar Chart'
-  }
-];
+import { ToolBoxContext, ToolboxElementType } from '../../../contexts/ToolBoxContext';
+import { MenuInfo } from 'rc-menu/lib/interface';
+import { ModalSiderContext } from '../../../contexts/ModalSiderContext';
 
 const Sider: React.FC = () => {
-  const { AddDashboardElement, DeleteDashboardElement, dashboardElements } = useContext(ToolBoxContext);
   const { collapsed } = useContext(LayoutContext);
 
-  const { selectedItem } = useContext(ModalSiderContext);
-  const { handleOpen, handleClick } = useContext(ModalSiderContext);
-
+  const { toolboxElements } = useContext(ToolBoxContext);
+  const { isVisible, selectedItem, handleOpen } = useContext(ModalSiderContext);
   // const { handleCancel } = useContext(ModalSiderContext);
   /* const handleOk = () => {
     setIsVisible(false);
@@ -49,12 +27,17 @@ const Sider: React.FC = () => {
     setSelectedItem({} as DashboardElementsType);
     setIsVisible(true);
   };*/
+  const handleClick = (tboxEl: MenuInfo) => {
+    const element = toolboxElements.find((el) => el.key === tboxEl.key);
+    if (element != undefined) {
+      handleOpen(element);
+    } else {
+      message.error('Element is not in toolbox');
+    }
+  };
   return (
     <>
       <Layout.Sider style={siderStyle} theme="light" trigger={null} collapsible collapsed={collapsed}>
-        {/* {toolboxElements.map((el, key) => (
-          <SiderItem hoverable key={key} onClick={() => handleClick(el)} />
-        ))} */}
         <Menu
           theme="light"
           mode="inline"
@@ -64,7 +47,11 @@ const Sider: React.FC = () => {
           onClick={handleClick}
         />
       </Layout.Sider>
-      {selectedItem.type == 'Bar' ? <BarModal /> : <PieModal />}
+      {selectedItem.key === '0' ? (
+        <PieModal item={selectedItem} isVisible={isVisible} />
+      ) : (
+        <BarModal item={selectedItem} isVisible={isVisible} />
+      )}
     </>
   );
 };

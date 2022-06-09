@@ -1,7 +1,9 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 
 interface ILayoutContext {
+  /** get the state of the sider (collapsed or not) */
   collapsed: boolean;
+  /** toggle the sider (open or close) */
   toggleSider: () => void;
 }
 

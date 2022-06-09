@@ -1,11 +1,11 @@
 import { Card, CardProps } from 'antd';
 import React from 'react';
-import { DashboardElementsType } from '../../../contexts/ToolBoxContext';
+import { DashboardElementType } from '../../../contexts/ToolBoxContext';
 import BarChartTool from './BarChartTool';
 import PieChartTool from './PieChartTool';
 
 interface SiderItemProps extends CardProps {
-  element: DashboardElementsType;
+  element: DashboardElementType;
 }
 
 const DashCard: React.FC<SiderItemProps> = ({ element, ...props }) => {
