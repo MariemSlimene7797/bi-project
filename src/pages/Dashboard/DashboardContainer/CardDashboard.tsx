@@ -1,5 +1,6 @@
 import { Card, CardProps } from 'antd';
 import React from 'react';
+import ReactGridLayout from 'react-grid-layout';
 import { DashboardElementType } from '../../../contexts/ToolBoxContext';
 import BarChartTool from './BarChartTool';
 import PieChartTool from './PieChartTool';

@@ -1,12 +1,15 @@
 import React, { CSSProperties } from 'react';
+import ReactGridLayout from 'react-grid-layout';
 import DashboardContainer from './DashboardContainer';
+import MinMaxLayout from './DashboardContainer/GridLayout/GridLayout';
 import Sider from './Sider';
 
 const Dashboard: React.FC = () => {
   return (
     <div style={DashboardWrapperStyle}>
       <Sider />
-      <DashboardContainer />
+
+      <MinMaxLayout />
     </div>
   );
 };
