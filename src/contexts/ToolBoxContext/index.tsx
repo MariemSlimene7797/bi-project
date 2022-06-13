@@ -1,6 +1,27 @@
-import { BarChartOutlined, PieChartOutlined } from '@ant-design/icons';
-import { ItemType } from 'antd/lib/menu/hooks/useItems';
+import { AreaChartOutlined, BarChartOutlined, FundOutlined, PieChartOutlined, TableOutlined } from '@ant-design/icons';
 import React, { createContext, useState } from 'react';
+import { ReactGridLayoutProps } from 'react-grid-layout';
+
+export type DashboardElementType = {
+  itemID?: React.Key;
+  key: React.Key;
+  tboxItemType: 'Pie' | 'Bar' | 'Area' | 'Table' | 'Stat';
+  label?: string;
+  title?: string;
+  icon?: React.ReactNode;
+  gridLayout?: Pick<ReactGridLayoutProps, 'layout'>;
+};
+const gridLayout: ReactGridLayoutProps = {
+  isDraggable: true,
+  // isResizable: true;
+
+  rowHeight: 30,
+  preventCollision: true,
+  compactType: null,
+  cols: 12
+};
+
+export type ToolboxElementType = Required<DashboardElementType>;
 
 interface IToolBoxContext {
   // dashboard
@@ -13,24 +34,47 @@ interface IToolBoxContext {
   DeleteToolboxElement: (el: ToolboxElementType) => void;
 }
 
-const ElementType = ['Bar', 'Pie'] as const;
+const ElementType = ['Bar', 'Pie', 'Area', 'Table', 'Stat'] as const;
 export type Tool = typeof ElementType[number];
 
-export type DashboardElementType = {
-  id: React.Key;
-  title: string;
-  type: Tool;
-};
-
-// how to extend a type in typescript ItemType
-export type ToolboxElementType = ItemType & {
-  type: Tool;
-};
-
-// delete these elements after implementation of add tbox elements
 const TBOX_ELEMENTS: ToolboxElementType[] = [
-  { key: '0', icon: <PieChartOutlined />, label: 'Pie Chart', type: 'Pie' },
-  { key: '1', icon: <BarChartOutlined />, label: 'Bar Chart', type: 'Bar' }
+  { itemID: '0', key: '0', icon: <PieChartOutlined />, label: 'Pie Chart', title: '', tboxItemType: 'Pie', gridLayout },
+  {
+    itemID: '1',
+    key: '1',
+    icon: <BarChartOutlined />,
+    label: 'Bar Chart',
+    title: '',
+    tboxItemType: 'Bar',
+    gridLayout
+  },
+  {
+    itemID: '2',
+    key: '2',
+    icon: <AreaChartOutlined />,
+    label: 'Area Chart',
+    title: '',
+    tboxItemType: 'Area',
+    gridLayout
+  },
+  {
+    itemID: '3',
+    key: '3',
+    icon: <TableOutlined />,
+    label: 'Data Table',
+    title: '',
+    tboxItemType: 'Table',
+    gridLayout
+  },
+  {
+    itemID: '4',
+    key: '4',
+    icon: <FundOutlined />,
+    label: 'Statistic Card',
+    title: '',
+    tboxItemType: 'Stat',
+    gridLayout
+  }
 ];
 export const ToolBoxContext = createContext<IToolBoxContext>({} as IToolBoxContext);
 const ToolBoxContextProvider: React.FC = ({ children }) => {
@@ -40,7 +84,7 @@ const ToolBoxContextProvider: React.FC = ({ children }) => {
     setDashboardElements([...dashboardElements, el]);
   };
   const DeleteDashboardElement = (el: DashboardElementType) => {
-    setDashboardElements(dashboardElements.filter((_el) => _el.id !== el.id));
+    setDashboardElements(dashboardElements.filter((_el) => _el.itemID !== el.itemID));
   };
   const AddToolboxElement = (el: ToolboxElementType) => {
     setToolboxElements([...toolboxElements, el]);

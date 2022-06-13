@@ -9,7 +9,7 @@ const Dashboard: React.FC = () => {
     <div style={DashboardWrapperStyle}>
       <Sider />
 
-      <MinMaxLayout />
+      <DashboardContainer />
     </div>
   );
 };

@@ -6,11 +6,14 @@ import BarModal from './BarModal';
 import { ToolBoxContext, ToolboxElementType } from '../../../contexts/ToolBoxContext';
 import { MenuInfo } from 'rc-menu/lib/interface';
 import { ModalSiderContext } from '../../../contexts/ModalSiderContext';
+import { ItemType } from 'antd/lib/menu/hooks/useItems';
+import AreaModal from './AreaModal';
 
 const Sider: React.FC = () => {
   const { collapsed } = useContext(LayoutContext);
 
   const { toolboxElements } = useContext(ToolBoxContext);
+
   const { isVisible, selectedItem, handleOpen } = useContext(ModalSiderContext);
   // const { handleCancel } = useContext(ModalSiderContext);
   /* const handleOk = () => {
@@ -42,13 +45,13 @@ const Sider: React.FC = () => {
           theme="light"
           mode="inline"
           selectable={false}
-          items={toolboxElements}
+          items={toolboxElements as ItemType[]}
           style={SiderItemStyle}
           onClick={handleClick}
         />
       </Layout.Sider>
-      {selectedItem.key === '0' ? (
-        <PieModal item={selectedItem} isVisible={isVisible} />
+      {selectedItem.key === '2' ? (
+        <AreaModal item={selectedItem} isVisible={isVisible} />
       ) : (
         <BarModal item={selectedItem} isVisible={isVisible} />
       )}

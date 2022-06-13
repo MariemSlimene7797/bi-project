@@ -12,6 +12,7 @@ interface IModalSiderContext {
   selectedItem: ToolboxElementType;
   handleSelectionPie: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSelectionBar: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSelectionArea: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleOpen: (info: ToolboxElementType) => void;
 }
 
@@ -22,8 +23,14 @@ const ModalSiderContextProvider: React.FC = ({ children }) => {
   const { AddDashboardElement, DeleteDashboardElement, dashboardElements } = useContext(ToolBoxContext);
   const handleOk = () => {
     setIsVisible(!isVisible);
-    AddDashboardElement({ id: selectedItem.key, title: '', type: selectedItem.type });
-    console.log(selectedItem.type);
+    AddDashboardElement({
+      itemID: selectedItem.key,
+      title: selectedItem.title, //its the inserted title
+      tboxItemType: selectedItem.tboxItemType,
+      key: ''
+    });
+    console.log(selectedItem.tboxItemType);
+    console.log(selectedItem.title);
   };
   const handleCancel = () => {
     setIsVisible(!isVisible);
@@ -37,12 +44,17 @@ const ModalSiderContextProvider: React.FC = ({ children }) => {
   const handleSelectionPie = (e: React.ChangeEvent<HTMLInputElement>) => {
     //value of context should change according to argument 'e'
 
-    setSelectedItem({ ...selectedItem, title: e.target.value.toString(), type: 'Pie' });
+    setSelectedItem({ ...selectedItem, title: e.target.value.toString(), tboxItemType: 'Pie' });
+  };
+  const handleSelectionArea = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //value of context should change according to argument 'e'
+
+    setSelectedItem({ ...selectedItem, title: e.target.value.toString(), tboxItemType: 'Area' });
   };
   const handleSelectionBar = (e: React.ChangeEvent<HTMLInputElement>) => {
     //value of context should change according to argument 'e'
 
-    setSelectedItem({ ...selectedItem, title: e.target.value.toString(), type: 'Bar' });
+    setSelectedItem({ ...selectedItem, title: e.target.value.toString(), tboxItemType: 'Bar' });
   };
 
   return (
@@ -54,6 +66,7 @@ const ModalSiderContextProvider: React.FC = ({ children }) => {
         selectedItem,
         handleSelectionPie,
         handleSelectionBar,
+        handleSelectionArea,
         handleOpen
       }}
     >
