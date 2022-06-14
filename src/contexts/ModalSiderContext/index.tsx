@@ -1,9 +1,8 @@
-import { MenuInfo } from 'rc-menu/lib/interface';
 import React, { createContext, useContext, useState } from 'react';
-import BarModal from '../../pages/Dashboard/Sider/BarModal';
-import PieModal from '../../pages/Dashboard/Sider/PieModal';
-import { ToolBoxContext, DashboardElementType, ToolboxElementType, Tool } from '../ToolBoxContext';
-
+import { ToolBoxContext, ToolboxElementType } from '../ToolBoxContext';
+/**interface IModalSiderContext presents all the fonctions that will be needed in order to create the modal and realise the link between the sider and the modal of each tool
+ * as well as the link between the dashboard and the modal.
+ */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface IModalSiderContext {
   isVisible: boolean;
@@ -15,12 +14,12 @@ interface IModalSiderContext {
   handleSelectionArea: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleOpen: (info: ToolboxElementType) => void;
 }
-
+/**creation of the context */
 export const ModalSiderContext = createContext<IModalSiderContext>({} as IModalSiderContext);
 const ModalSiderContextProvider: React.FC = ({ children }) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<ToolboxElementType>({} as ToolboxElementType);
-  const { AddDashboardElement, DeleteDashboardElement, dashboardElements } = useContext(ToolBoxContext);
+  const { AddDashboardElement } = useContext(ToolBoxContext);
   const handleOk = () => {
     setIsVisible(!isVisible);
     AddDashboardElement({

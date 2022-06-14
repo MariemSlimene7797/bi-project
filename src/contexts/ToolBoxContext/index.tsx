@@ -1,7 +1,7 @@
 import { AreaChartOutlined, BarChartOutlined, FundOutlined, PieChartOutlined, TableOutlined } from '@ant-design/icons';
 import React, { createContext, useState } from 'react';
 import { ReactGridLayoutProps } from 'react-grid-layout';
-
+/**type of elements in both Dashboard List and Toolbox List */
 export type DashboardElementType = {
   itemID?: React.Key;
   key: React.Key;
@@ -11,6 +11,7 @@ export type DashboardElementType = {
   icon?: React.ReactNode;
   gridLayout?: Pick<ReactGridLayoutProps, 'layout'>;
 };
+/**ReactGridLayoutProps of grid Layout */
 const gridLayout: ReactGridLayoutProps = {
   isDraggable: true,
   // isResizable: true;
@@ -20,9 +21,9 @@ const gridLayout: ReactGridLayoutProps = {
   compactType: null,
   cols: 12
 };
-
+/**the use of Required allows the use of all the props of type DashboardElementProps for both ToolElementType and DashboardElementType*/
 export type ToolboxElementType = Required<DashboardElementType>;
-
+/**interface that contains all the meth that we will be using to control our lists */
 interface IToolBoxContext {
   // dashboard
   dashboardElements: DashboardElementType[];
@@ -33,10 +34,10 @@ interface IToolBoxContext {
   AddToolboxElement: (el: ToolboxElementType) => void;
   DeleteToolboxElement: (el: ToolboxElementType) => void;
 }
-
+/**values of property "type" */
 const ElementType = ['Bar', 'Pie', 'Area', 'Table', 'Stat'] as const;
 export type Tool = typeof ElementType[number];
-
+/**values of elements of toolbox list */
 const TBOX_ELEMENTS: ToolboxElementType[] = [
   { itemID: '0', key: '0', icon: <PieChartOutlined />, label: 'Pie Chart', title: '', tboxItemType: 'Pie', gridLayout },
   {
@@ -76,6 +77,7 @@ const TBOX_ELEMENTS: ToolboxElementType[] = [
     gridLayout
   }
 ];
+/**context creation */
 export const ToolBoxContext = createContext<IToolBoxContext>({} as IToolBoxContext);
 const ToolBoxContextProvider: React.FC = ({ children }) => {
   const [dashboardElements, setDashboardElements] = useState<DashboardElementType[]>([]);

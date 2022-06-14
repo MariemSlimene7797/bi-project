@@ -8,14 +8,25 @@ interface PieModalProps {
   isVisible: boolean;
   item: ToolboxElementType;
 }
-
+/**the modal related to pie chart will show once you click on its card
+ * this component contains all the params related to the pie chart.
+ * the ok button will show you the chart realised based on the params you provided
+ * the provided params are inserted in handleSelectionPie
+ */
 const PieModal: React.FC<PieModalProps> = ({ isVisible, item }) => {
-  const { handleOk, handleCancel, handleSelectionPie } = useContext(ModalSiderContext);
+  console.log('test22');
+  const { handleOk, handleCancel, handleSelectionPie, selectedItem } = useContext(ModalSiderContext);
 
   return (
     <>
       <Modal title="Pie Form" visible={isVisible} onOk={handleOk} onCancel={handleCancel}>
-        <Input placeholder="Enter object title" type="text" className="title" onChange={handleSelectionPie} />
+        <Input
+          placeholder="Enter object title"
+          type="text"
+          className="title"
+          value={selectedItem.title}
+          onChange={handleSelectionPie}
+        />
       </Modal>
     </>
   );

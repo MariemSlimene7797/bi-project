@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
-
+/**source code extracted from recharts that realises the Pie chart  */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 type DATA = {
   name: string;

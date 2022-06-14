@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-
+/**allows the control of the collapse caracteristic of the sider as well as the change of the toggle button */
 interface ILayoutContext {
   /** get the state of the sider (collapsed or not) */
   collapsed: boolean;

@@ -1,6 +1,5 @@
 import { Card, CardProps } from 'antd';
 import React from 'react';
-import ReactGridLayout from 'react-grid-layout';
 import { DashboardElementType } from '../../../contexts/ToolBoxContext';
 import AreaChartTool from './AreaChartTool';
 import BarChartTool from './BarChartTool';
@@ -9,7 +8,7 @@ import PieChartTool from './PieChartTool';
 interface SiderItemProps extends CardProps {
   element: DashboardElementType;
 }
-
+/**control of which chart the card would contain  */
 const DashCard: React.FC<SiderItemProps> = ({ element, ...props }) => {
   return (
     <Card {...props} style={CardStyle} title={element.title}>

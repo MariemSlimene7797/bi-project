@@ -15,21 +15,6 @@ const Sider: React.FC = () => {
   const { toolboxElements } = useContext(ToolBoxContext);
 
   const { isVisible, selectedItem, handleOpen } = useContext(ModalSiderContext);
-  // const { handleCancel } = useContext(ModalSiderContext);
-  /* const handleOk = () => {
-    setIsVisible(false);
-    AddDashboardElement(selectedItem);
-    console.log(selectedItem);
-  };
-  const handleCancel = () => {
-    setIsVisible(false);
-  };
-
-  const handleOpen = (elKey: string) => {
-    console.log(elKey);
-    setSelectedItem({} as DashboardElementsType);
-    setIsVisible(true);
-  };*/
   const handleClick = (tboxEl: MenuInfo) => {
     const element = toolboxElements.find((el) => el.key === tboxEl.key);
     if (element != undefined) {
@@ -38,6 +23,7 @@ const Sider: React.FC = () => {
       message.error('Element is not in toolbox');
     }
   };
+  /**the sider opens the corresponding modal according to the clicked option in the sider */
   return (
     <>
       <Layout.Sider style={siderStyle} theme="light" trigger={null} collapsible collapsed={collapsed}>
@@ -50,11 +36,22 @@ const Sider: React.FC = () => {
           onClick={handleClick}
         />
       </Layout.Sider>
-      {selectedItem.key === '2' ? (
-        <AreaModal item={selectedItem} isVisible={isVisible} />
-      ) : (
-        <BarModal item={selectedItem} isVisible={isVisible} />
-      )}
+      {(() => {
+        console.log('hello');
+        switch (selectedItem.key) {
+          case '0':
+            <PieModal item={selectedItem} isVisible={isVisible} />;
+            break;
+
+          case '1':
+            <BarModal item={selectedItem} isVisible={isVisible} />;
+            break;
+          case '2':
+            <AreaModal item={selectedItem} isVisible={isVisible} />;
+            break;
+        }
+      })()}
+      ;
     </>
   );
 };
@@ -62,3 +59,9 @@ const Sider: React.FC = () => {
 export default Sider;
 const siderStyle: React.CSSProperties = { height: '100vh' };
 const SiderItemStyle: React.CSSProperties = { fontSize: '15px' };
+
+/*{selectedItem.key === '2' ? (
+        <AreaModal item={selectedItem} isVisible={isVisible} />
+      ) : (
+        <BarModal item={selectedItem} isVisible={isVisible} />
+      )}*/

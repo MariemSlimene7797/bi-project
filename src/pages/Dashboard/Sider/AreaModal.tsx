@@ -10,7 +10,7 @@ interface AreaModalProps {
 }
 
 const AreaModal: React.FC<AreaModalProps> = ({ isVisible, item }) => {
-  const { handleOk, handleCancel, handleSelectionArea } = useContext(ModalSiderContext);
+  const { handleOk, handleCancel, handleSelectionArea, selectedItem } = useContext(ModalSiderContext);
 
   return (
     <>
@@ -19,7 +19,7 @@ const AreaModal: React.FC<AreaModalProps> = ({ isVisible, item }) => {
           placeholder="Enter object title"
           type="text"
           className="title"
-          value=" "
+          value={selectedItem.title}
           onChange={handleSelectionArea}
         />
       </Modal>

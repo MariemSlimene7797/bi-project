@@ -9,8 +9,8 @@ interface BarModalProps {
   item: ToolboxElementType;
 }
 
-const BarModal: React.FC<BarModalProps> = ({ isVisible, item }) => {
-  const { handleOk, handleCancel, handleSelectionBar } = useContext(ModalSiderContext);
+const BarModal: React.FC<BarModalProps> = ({ isVisible }) => {
+  const { handleOk, handleCancel, handleSelectionBar, selectedItem } = useContext(ModalSiderContext);
 
   return (
     <>
@@ -19,7 +19,7 @@ const BarModal: React.FC<BarModalProps> = ({ isVisible, item }) => {
           placeholder="Enter object title"
           type="text"
           className="title"
-          value="bar "
+          value={selectedItem.title}
           onChange={handleSelectionBar}
         />
       </Modal>
