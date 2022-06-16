@@ -51,7 +51,6 @@ const Sider: React.FC = () => {
             break;
         }
       })()}
-      ;
     </>
   );
 };

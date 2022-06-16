@@ -2,7 +2,13 @@ import { Menu } from 'antd';
 import React, { useContext, useState } from 'react';
 import Menuitem from './NavItems';
 import { useHistory } from 'react-router-dom';
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import {
+  AppstoreOutlined,
+  FormOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  SettingOutlined
+} from '@ant-design/icons';
 import { LayoutContext } from '../../../contexts/LayoutContext';
 
 const LeftHeader: React.FC = () => {
@@ -55,3 +61,13 @@ const triggerHoverStyles: React.CSSProperties = {
   color: '#1890ff',
   transition: 'color 0.3s'
 };
+/* <Menu.SubMenu
+          key="SubMenu"
+          title="Settings"
+          icon={<SettingOutlined />}
+          style={{ minWidth: '100px', fontSize: '15px', color: 'white' }}
+        >
+          <Menu.Item key="one" icon={<FormOutlined />}>
+            Add New Parameter
+          </Menu.Item>
+        </Menu.SubMenu>*/
