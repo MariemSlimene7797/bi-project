@@ -1,17 +1,34 @@
 import { Cascader, Form, InputNumber, Modal, Select, Space } from 'antd';
-import React from 'react';
+import React, { ReactEventHandler, useState } from 'react';
 import { Button, Input } from 'antd';
 import { MinusCircleOutlined, PlusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import FormItem from 'antd/lib/form/FormItem';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface SettingsProps {}
 const onFinish = (values: any) => {
   console.log('Success:', values);
 };
-interface Option {
-  value: string;
-  label: string;
+
+type ProcedureType = {
+  key: React.Key;
+  name: string;
+  inputParameters?: InputType[];
+  outputParameters: OutputType[];
+};
+
+enum FormItems {
+  name = 'name',
+  inputParameters = 'inputParameters',
+  outputParameters = 'outputParameters'
 }
+
+interface InputType {
+  key: React.Key;
+  type: string;
+  name: string;
+}
+type OutputType = Required<InputType>;
 
 const Settings: React.FC<SettingsProps> = () => {
   const onFinish = (values: any) => {
@@ -22,13 +39,13 @@ const Settings: React.FC<SettingsProps> = () => {
     <Form name="New Parameter" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }} onFinish={onFinish} autoComplete="off">
       <Form.Item
         label="Name"
-        name="name"
+        name={FormItems.name}
         rules={[{ required: true, message: 'Please input the name of the procedure!' }]}
       >
-        <Input />
+        <Input className="name" />
       </Form.Item>
 
-      <Form.List name="input">
+      <Form.List name={FormItems.inputParameters}>
         {(fields, { add, remove }) => (
           <>
             {fields.map(({ key, name, ...restField }) => (
@@ -39,7 +56,7 @@ const Settings: React.FC<SettingsProps> = () => {
                   rules={[{ required: true, message: 'Missing Parameter Name' }]}
                   noStyle
                 >
-                  <Input placeholder="Name" style={{ marginRight: '100px' }} />
+                  <Input placeholder="Name" className="name" style={{ marginRight: '100px' }} />
                 </Form.Item>
                 <Form.Item
                   {...restField}
@@ -52,7 +69,6 @@ const Settings: React.FC<SettingsProps> = () => {
                   </Select>
                 </Form.Item>
                 <MinusCircleOutlined onClick={() => remove(name)} />
-                <PlusCircleOutlined onClick={() => add(name)} />
               </Space>
             ))}
             <Form.Item>
@@ -64,7 +80,7 @@ const Settings: React.FC<SettingsProps> = () => {
         )}
       </Form.List>
 
-      <Form.List name="output">
+      <Form.List name={FormItems.outputParameters}>
         {(fields, { add, remove }) => (
           <>
             {fields.map(({ key, name, ...restField }) => (
@@ -75,7 +91,7 @@ const Settings: React.FC<SettingsProps> = () => {
                   rules={[{ required: true, message: 'Missing Parameter Name' }]}
                   noStyle
                 >
-                  <Input placeholder="Name" style={{ marginRight: '100px' }} />
+                  <Input placeholder="Name" className="name" style={{ marginRight: '100px' }} />
                 </Form.Item>
                 <Form.Item
                   {...restField}
@@ -88,7 +104,6 @@ const Settings: React.FC<SettingsProps> = () => {
                   </Select>
                 </Form.Item>
                 <MinusCircleOutlined onClick={() => remove(name)} />
-                <PlusCircleOutlined onClick={() => add(name)} />
               </Space>
             ))}
             <Form.Item>
