@@ -1,14 +1,11 @@
-import { Cascader, Form, InputNumber, Modal, Select, Space } from 'antd';
-import React, { ReactEventHandler, useState } from 'react';
+import { Form, Select, Space } from 'antd';
+import React from 'react';
 import { Button, Input } from 'antd';
-import { MinusCircleOutlined, PlusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import FormItem from 'antd/lib/form/FormItem';
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+/**realisation of the new procedure form in the settings page */
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface SettingsProps {}
-const onFinish = (values: any) => {
-  console.log('Success:', values);
-};
 
 type ProcedureType = {
   key: React.Key;
@@ -16,7 +13,7 @@ type ProcedureType = {
   inputParameters?: InputType[];
   outputParameters: OutputType[];
 };
-
+/** strongly typed object */
 enum FormItems {
   name = 'name',
   inputParameters = 'inputParameters',
@@ -41,8 +38,9 @@ const Settings: React.FC<SettingsProps> = () => {
         label="Name"
         name={FormItems.name}
         rules={[{ required: true, message: 'Please input the name of the procedure!' }]}
+        style={{ marginTop: '50px' }}
       >
-        <Input className="name" />
+        <Input className="name" placeholder="insert name procedure here.." />
       </Form.Item>
 
       <Form.List name={FormItems.inputParameters}>
