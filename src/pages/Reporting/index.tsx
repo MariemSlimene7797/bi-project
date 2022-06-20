@@ -1,6 +1,5 @@
 import React, { CSSProperties } from 'react';
 import SiderReport from './SiderReport';
-import { T } from '@tolgee/react';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ReportingProps {}
 

@@ -2,7 +2,8 @@ import { Form, Select, Space } from 'antd';
 import React from 'react';
 import { Button, Input } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { T } from '@tolgee/react';
+import { useTranslation } from 'react-i18next';
+
 /**realisation of the new procedure form in the settings page */
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -33,12 +34,13 @@ const Settings: React.FC<SettingsProps> = () => {
     console.log('Received values of form:', values);
   };
 
+  const { t } = useTranslation();
   return (
     <Form name="New Parameter" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }} onFinish={onFinish} autoComplete="off">
       <Form.Item
         label="Name"
         name={FormItems.name}
-        rules={[{ required: true, message: <T>msgSettings</T> }]}
+        rules={[{ required: true, message: t('settings_form_name') }]}
         style={{ marginTop: '50px' }}
       >
         <Input className="name" placeholder="insert name procedure here.." />
