@@ -1,13 +1,19 @@
 import React from 'react';
-import AppLayout from './AppLayout';
 import AuthContextProvider from './contexts/AuthContext';
 import LanguageContextProvider from './contexts/LanguageContext';
+import LayoutContextProvider from './contexts/LayoutContext';
+import ThemeContextProvider from './contexts/ThemeContext';
+import Navigation from './Route';
 
 const App: React.FC = () => {
   return (
     <AuthContextProvider>
       <LanguageContextProvider>
-        <AppLayout />
+        <ThemeContextProvider>
+          <LayoutContextProvider>
+            <Navigation />
+          </LayoutContextProvider>
+        </ThemeContextProvider>
       </LanguageContextProvider>
     </AuthContextProvider>
   );

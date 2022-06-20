@@ -1,15 +1,20 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-
-import routes from './routes';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import AppLayout from '../AppLayout';
+import { useAuthContext } from '../contexts/AuthContext';
+import Login from '../pages/login';
 
 const Navigation: React.FC = () => {
+  const { session } = useAuthContext();
   return (
-    <Switch>
-      {routes.map((el, key) => (
-        <Route exact={el.exact} key={key} path={el.path} component={el.component} />
-      ))}
-    </Switch>
+    <Router>
+      <Switch>
+        <Route exact path="/login">
+          {session?.isAuthenticated ? <Redirect to="/" /> : <Login />}
+        </Route>
+        <Route render={() => (session?.isAuthenticated ? <AppLayout /> : <Redirect to="/login" />)} />
+      </Switch>
+    </Router>
   );
 };
 

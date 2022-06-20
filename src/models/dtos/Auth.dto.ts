@@ -2,9 +2,8 @@ export type ISession = {
   AccessToken?: string;
   RefreshToken?: string;
   isAuthenticated: boolean;
-  roles?: role[];
-  UserName?: string;
-  userID?: string;
+  FirstName?: string;
+  UserId?: string;
 };
 
 export type LoginParamsType = {

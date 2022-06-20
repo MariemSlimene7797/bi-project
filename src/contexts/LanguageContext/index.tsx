@@ -5,6 +5,8 @@ import ICU from 'i18next-icu';
 import { initReactI18next } from 'react-i18next';
 import Spinner from '../../components/Spinner';
 
+const SUPORTED_LANGUAGES = ['en', 'fr'];
+
 withTolgee(i18n, {
   apiUrl: process.env.REACT_APP_TOLGEE_API_URL,
   apiKey: process.env.REACT_APP_TOLGEE_API_KEY,
@@ -17,16 +19,25 @@ withTolgee(i18n, {
   .use(initReactI18next)
   .init({
     lng: 'en',
-    supportedLngs: ['cs', 'en', 'fr', 'de']
+    supportedLngs: SUPORTED_LANGUAGES
   });
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface ILanguageContext {}
+interface ILanguageContext {
+  supportedLangauges: string[];
+  // changeLanguage: (language: string) => void;
+}
 
 const LanguageContext = createContext<ILanguageContext>({} as ILanguageContext);
 const LanguageContextProvider: React.FC = ({ children }) => {
+  // const [selectedLanguage, setSelectedLanguage] = useState<string>('fr');
+  // const { t, i18n } = useTranslation();
+  // const changeLanguage = (language: string) => {
+  //   setSelectedLanguage(language);
+  //   i18n.changeLanguage(language);
+  // };
   return (
-    <LanguageContext.Provider value={{}}>
+    <LanguageContext.Provider value={{ supportedLangauges: SUPORTED_LANGUAGES }}>
       <Suspense fallback={<Spinner />}>{children}</Suspense>
     </LanguageContext.Provider>
   );

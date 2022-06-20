@@ -1,4 +1,12 @@
 {
-  "Add" : "Add",
-  "Delete" : "Delete"
+  "ChangePassword" : "Change Password",
+  "Exit" : "Exit",
+  "Notifications" : "Notifications",
+  "OnlineMarket" : "Online Market",
+  "OrderExecution" : "Stock market order book",
+  "OrderHistory" : "Stock market order history",
+  "PrimaryMarket" : "Primary market",
+  "Profile" : "Profile",
+  "UserHistory" : "Account balance",
+  "UserPortfolio" : "Portfolio"
 }

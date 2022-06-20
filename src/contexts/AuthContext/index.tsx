@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import React, { createContext, useContext, useState } from 'react';
 import { ISession, LoginParamsType } from '../../models/dtos/Auth.dto';
 
@@ -13,11 +14,7 @@ const AuthContextProvider: React.FC = ({ children }) => {
 
   const logIn = async (params: LoginParamsType): Promise<ISession> => {
     setSession({
-      isAuthenticated: true,
-      userID: '1',
-      UserName: params.userName,
-      AccessToken: params.Password,
-      RefreshToken: params.Password
+      isAuthenticated: true
     });
     return session;
   };

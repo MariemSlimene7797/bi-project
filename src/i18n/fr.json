@@ -1,4 +1,12 @@
 {
-  "Add" : "Ajouter",
-  "Delete" : "Supprimer"
+  "ChangePassword" : "Changer mot de passe",
+  "Exit" : "Quitter",
+  "Notifications" : "Notifications",
+  "OnlineMarket" : "Marché en ligne",
+  "OrderExecution" : "Carnet d'ordre en bourse",
+  "OrderHistory" : "Historique ordres en bourse",
+  "PrimaryMarket" : "Marché primaire",
+  "Profile" : "Profile",
+  "UserHistory" : "Relevé de compte espèces",
+  "UserPortfolio" : "Portefeuille"
 }
