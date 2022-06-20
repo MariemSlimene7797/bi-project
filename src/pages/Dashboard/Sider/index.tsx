@@ -53,9 +53,3 @@ const Sider: React.FC = () => {
 export default Sider;
 const siderStyle: React.CSSProperties = { height: '100vh' };
 const SiderItemStyle: React.CSSProperties = { fontSize: '15px' };
-
-/*{selectedItem.key === '2' ? (
-        <AreaModal item={selectedItem} isVisible={isVisible} />
-      ) : (
-        <BarModal item={selectedItem} isVisible={isVisible} />
-      )}*/
