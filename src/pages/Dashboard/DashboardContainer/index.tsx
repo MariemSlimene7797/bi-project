@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import ReactGridLayout from 'react-grid-layout';
 import { ToolBoxContext } from '../../../contexts/ToolBoxContext';
 import DashCard from './CardDashboard';
-
+import { T } from '@tolgee/react';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface DashboardContainerProps {}
 /** mapping of the dashboardElements list and presenting eaxh element into a card*/
