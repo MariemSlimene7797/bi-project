@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import AppLayout from '../AppLayout';
 import { useAuthContext } from '../contexts/AuthContext';
+
 import Login from '../pages/login';
 
 const Navigation: React.FC = () => {
