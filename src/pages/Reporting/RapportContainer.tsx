@@ -1,4 +1,10 @@
 import React from 'react';
+import { FetchState } from '../../models/types/FetchState';
+import { useGetPosts } from '../../Services/HttpCommunFile';
+import RequeteRaport from './RequeteRaport';
+import SiderReport from './SiderReport';
+
+//import { useGetPosts } from './Services/HttpCommunFile';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ReportingProps {}
@@ -25,7 +31,11 @@ const ListReports: reportType[] = [
   }
 ];
 const Reporting: React.FC<ReportingProps> = () => {
-  return <></>;
+  return (
+    <>
+      <RequeteRaport />
+    </>
+  );
 };
 
 export default Reporting;

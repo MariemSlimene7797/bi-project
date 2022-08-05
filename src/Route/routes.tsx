@@ -28,7 +28,7 @@ const routes: RouteType[] = [
     component: React.lazy(() => import('../pages/Dashboard')),
     isMenu: true,
     menu: {
-      key: 'menu_item_dashboard',
+      key: 'Dashboard',
       icon: <LineChartOutlined />
     }
   },
@@ -37,7 +37,7 @@ const routes: RouteType[] = [
     component: React.lazy(() => import('../pages/Reporting')),
     isMenu: true,
     menu: {
-      key: 'menu_item_reporting',
+      key: 'Reporting',
       icon: <FileTextOutlined />
     }
   },
@@ -46,7 +46,7 @@ const routes: RouteType[] = [
     component: React.lazy(() => import('../pages/Settings')),
     isMenu: true,
     menu: {
-      key: 'menu_item_settings',
+      key: 'Settings',
       icon: <SettingOutlined />
     }
   }

@@ -1,8 +1,12 @@
-import { Layout, Menu } from 'antd';
-import React from 'react';
+import { Button, Card, Layout, Menu } from 'antd';
+import React, { useState } from 'react';
 import { useLayoutContext } from '../../contexts/LayoutContext';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import { StarFilled, StarOutlined } from '@ant-design/icons';
+import FormReport from './FormReport';
+import MenuItem from 'antd/lib/menu/MenuItem';
+import RequeteRaport from './RequeteRaport';
+/**creation of the sider */
 /**Creation of the collapsed sider and its items along with their options */
 /**creation of the record */
 const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
@@ -30,6 +34,7 @@ const FavList: siderDataType[] = [];
 /**the FC that inserted the items of the Report Sider */
 const SiderReport: React.FC = () => {
   /**the collapsed button */
+
   const { collapsed } = useLayoutContext();
   /**list of the categories */
   const results = groupBy(siderData, (i) => i.category);
@@ -38,7 +43,10 @@ const SiderReport: React.FC = () => {
 
   categories.unshift('Favorites');
   console.log(categories);
-
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+  const [isModalVisible, setIsModalVisible] = useState(false);
   /**creation of the menu Items  */
 
   const menuItems: ItemType[] = categories.map((category) => {
@@ -61,10 +69,11 @@ const SiderReport: React.FC = () => {
   });
 
   return (
-    <Layout.Sider style={siderStyle} theme="light" trigger={null} collapsible collapsed={collapsed}>
+    <Layout.Sider style={siderStyle} theme="light" trigger={null}>
       {console.log('items', menuItems)}
-
       <Menu theme="light" mode="inline" items={menuItems} style={SiderItemStyle} />
+
+      <FormReport />
     </Layout.Sider>
   );
 };
