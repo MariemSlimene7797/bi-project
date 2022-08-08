@@ -3,6 +3,7 @@ import React from 'react';
 import { Button, Input } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
+import { AddReport } from '../../Services/ReportingService';
 
 /**realisation of the new procedure form in the settings page */
 
@@ -32,6 +33,33 @@ type OutputType = Required<InputType>;
 const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
   const onFinish = (values: any) => {
     console.log('Received values of form:', values);
+    // add new report logic
+    const inputParameters = values.inputParameters.map((param: any) => {
+      return {
+        parameterSide: 0,
+        name: param.name,
+        parameterType: +param.type,
+        required: true
+      };
+    });
+    const outputParameters = values.outputParameters.map((param: any) => {
+      return {
+        parameterSide: 1,
+        name: param.name,
+        parameterType: +param.type,
+        required: true
+      };
+    });
+    const report = {
+      name: values.name,
+      description: 'react Test data',
+      parameters: [...inputParameters, ...outputParameters],
+      insertDateTime: '2022-08-06T12:55:25.586Z',
+      updateDateTime: '2022-08-06T12:55:25.586Z'
+    };
+
+    console.log('Updated values of form:', report);
+    AddReport(report);
   };
 
   const { t } = useTranslation();
@@ -65,8 +93,8 @@ const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
                   rules={[{ required: true, message: 'Missing Parameter type' }]}
                 >
                   <Select placeholder="type" style={{ width: '100px' }}>
-                    <Select.Option value="int">Int</Select.Option>
-                    <Select.Option value="string">String</Select.Option>
+                    <Select.Option value={0}>Int</Select.Option>
+                    <Select.Option value={1}>String</Select.Option>
                   </Select>
                 </Form.Item>
                 <MinusCircleOutlined onClick={() => remove(name)} />
@@ -100,8 +128,8 @@ const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
                   rules={[{ required: true, message: 'Missing Parameter type' }]}
                 >
                   <Select placeholder="type" style={{ width: '100px' }}>
-                    <Select.Option value="int">Int</Select.Option>
-                    <Select.Option value="string">String</Select.Option>
+                    <Select.Option value={0}>Int</Select.Option>
+                    <Select.Option value={1}>String</Select.Option>
                   </Select>
                 </Form.Item>
                 <MinusCircleOutlined onClick={() => remove(name)} />

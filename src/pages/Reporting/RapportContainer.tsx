@@ -1,8 +1,10 @@
 import React from 'react';
+import { useReportContext } from '../../contexts/ReportContext';
 import { FetchState } from '../../models/types/FetchState';
 import { useGetPosts } from '../../Services/HttpCommunFile';
 import RequeteRaport from './RequeteRaport';
 import SiderReport from './SiderReport';
+import TestComp from './TestComp';
 
 //import { useGetPosts } from './Services/HttpCommunFile';
 
@@ -32,9 +34,9 @@ const ListReports: reportType[] = [
 ];
 const Reporting: React.FC<ReportingProps> = () => {
   return (
-    <>
-      <RequeteRaport />
-    </>
+    <div>
+      <TestComp />
+    </div>
   );
 };
 
