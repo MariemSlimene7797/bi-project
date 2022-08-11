@@ -64,14 +64,14 @@ const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
 
   const { t } = useTranslation();
   return (
-    <Form name="New Parameter" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }} onFinish={onFinish} autoComplete="off">
+    <Form name="New Parameter" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }} onFinish={onFinish} autoComplete="on">
       <Form.Item
-        label="Name"
+        label="Name Procedure"
         name={FormItems.name}
-        rules={[{ required: true, message: t('settings_form_name') }]}
+        rules={[{ required: true, message: 'Name Procedure Missing' }]}
         style={{ marginTop: '50px' }}
       >
-        <Input className="name" placeholder="insert name procedure here.." />
+        <Input className="name" placeholder="Insert Name Procedure Here.." />
       </Form.Item>
 
       <Form.List name={FormItems.inputParameters}>
@@ -82,17 +82,17 @@ const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
                 <Form.Item
                   {...restField}
                   name={[name, 'name']}
-                  rules={[{ required: true, message: 'Missing Parameter Name' }]}
+                  rules={[{ required: true, message: 'Parameter Name Missing' }]}
                   noStyle
                 >
-                  <Input placeholder="Name" className="name" style={{ marginRight: '100px' }} />
+                  <Input placeholder="Insert Parameter Name" className="name" style={{ marginRight: '100px' }} />
                 </Form.Item>
                 <Form.Item
                   {...restField}
                   name={[name, 'type']}
-                  rules={[{ required: true, message: 'Missing Parameter type' }]}
+                  rules={[{ required: true, message: 'Parameter Type Missing' }]}
                 >
-                  <Select placeholder="type" style={{ width: '100px' }}>
+                  <Select placeholder="Parameter Type" style={{ width: '150px' }}>
                     <Select.Option value={0}>Int</Select.Option>
                     <Select.Option value={1}>String</Select.Option>
                   </Select>
@@ -117,17 +117,17 @@ const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
                 <Form.Item
                   {...restField}
                   name={[name, 'name']}
-                  rules={[{ required: true, message: 'Missing Parameter Name' }]}
+                  rules={[{ required: true, message: 'Parameter Name Missing' }]}
                   noStyle
                 >
-                  <Input placeholder="Name" className="name" style={{ marginRight: '100px' }} />
+                  <Input placeholder=" Insert Parameter Name" className="name" style={{ marginRight: '100px' }} />
                 </Form.Item>
                 <Form.Item
                   {...restField}
                   name={[name, 'type']}
-                  rules={[{ required: true, message: 'Missing Parameter type' }]}
+                  rules={[{ required: true, message: 'Parameter Type Missing' }]}
                 >
-                  <Select placeholder="type" style={{ width: '100px' }}>
+                  <Select placeholder="Parameter Type" style={{ width: '150px' }}>
                     <Select.Option value={0}>Int</Select.Option>
                     <Select.Option value={1}>String</Select.Option>
                   </Select>

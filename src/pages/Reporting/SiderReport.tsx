@@ -8,7 +8,8 @@ import MenuItem from 'antd/lib/menu/MenuItem';
 import RequeteRaport from './RequeteRaport';
 import { FetchState } from '../../models/types/FetchState';
 import { useGetPosts } from '../../Services/HttpCommunFile';
-import { ReportContext } from '../../contexts/ReportContext';
+import ReportContext from '../../contexts/ReportContext';
+import { CategoryReportcontexts, useCategoryReportcontexts } from '../../contexts/CategoryReport';
 
 /**creation of the sider */
 /**Creation of the collapsed sider and its items along with their options */
@@ -38,9 +39,7 @@ const FavList: siderDataType[] = [];
 /**the FC that inserted the items of the Report Sider */
 const SiderReport: React.FC = () => {
   /**the collapsed button */
-
-  const [posts, fetchState, getPosts] = useGetPosts();
-  const { getRequest } = useContext(ReportContext);
+  const { categoryList } = useContext(CategoryReportcontexts);
   const { collapsed } = useLayoutContext();
   /**list of the categories */
   const results = groupBy(siderData, (i) => i.category);
@@ -53,6 +52,8 @@ const SiderReport: React.FC = () => {
     setIsModalVisible(true);
   };
   const [isModalVisible, setIsModalVisible] = useState(false);
+  // const { categoryList } = useCategoryReportcontexts();
+
   /**creation of the menu Items  */
 
   const menuItems: ItemType[] = categories.map((category) => {
@@ -76,11 +77,6 @@ const SiderReport: React.FC = () => {
 
   return (
     <Layout.Sider style={siderStyle} theme="light" trigger={null}>
-      {console.log('items', menuItems)}
-      {fetchState === FetchState.DEFAULT && (
-        <Menu theme="light" mode="inline" items={menuItems} style={SiderItemStyle} onClick={getRequest} />
-      )}
-
       <FormReport />
     </Layout.Sider>
   );
