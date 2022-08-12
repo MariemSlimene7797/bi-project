@@ -1,5 +1,6 @@
 import React from 'react';
 import AuthContextProvider from './contexts/AuthContext';
+import CategoryReportcontextsProvider from './contexts/CategoryReport';
 import LanguageContextProvider from './contexts/LanguageContext';
 import LayoutContextProvider from './contexts/LayoutContext';
 import ThemeContextProvider from './contexts/ThemeContext';
@@ -11,7 +12,9 @@ const App: React.FC = () => {
       <LanguageContextProvider>
         <ThemeContextProvider>
           <LayoutContextProvider>
-            <Navigation />
+            <CategoryReportcontextsProvider>
+              <Navigation />
+            </CategoryReportcontextsProvider>
           </LayoutContextProvider>
         </ThemeContextProvider>
       </LanguageContextProvider>

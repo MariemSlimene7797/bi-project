@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 export type CategoryElementType = {
-  CategoryName: string;
+  categoryname: string;
+  categoryKey: React.Key | null | undefined;
 };
 interface ICategoryReportcontexts {
   categoryList: CategoryElementType[];
@@ -11,7 +12,12 @@ export const CategoryReportcontexts = createContext<ICategoryReportcontexts>({} 
 const CategoryReportcontextsProvider: React.FC = ({ children }) => {
   const [categoryList, setCategoryList] = useState<CategoryElementType[]>([]);
   const AddcategorytoList = (el: CategoryElementType) => {
+    /*if (categoryList.length == 0) {
+      el.CategoryName = 'favorites';
+      setCategoryList([...categoryList, el]);
+    } else {*/
     setCategoryList([...categoryList, el]);
+    console.log(categoryList);
   };
 
   return (

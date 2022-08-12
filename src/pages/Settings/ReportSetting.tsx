@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Form, Select, Space } from 'antd';
 
 import { Button, Input } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { AddReport } from '../../Services/ReportingService';
+import { CategoryReportcontexts } from '../../contexts/CategoryReport';
 
 /**realisation of the new procedure form in the settings page */
 
@@ -53,6 +54,7 @@ const ReportSettings: React.FC<ReportSettingsProps> = () => {
     console.log('Updated values of form:', Report);
     //  AddReport(Report);
   };
+  const { categoryList } = React.useContext(CategoryReportcontexts);
 
   const { t } = useTranslation();
   return (
@@ -71,8 +73,11 @@ const ReportSettings: React.FC<ReportSettingsProps> = () => {
         rules={[{ required: true, message: 'Category Name Missing' }]}
       >
         <Select placeholder="Category" style={{ width: '150px' }}>
-          <Select.Option value={0}>XX</Select.Option>
-          <Select.Option value={1}>YY</Select.Option>
+          {categoryList.map((categoryname, categoryKey) => (
+            <div key={categoryKey}>
+              <Select.Option>{categoryname}</Select.Option>
+            </div>
+          ))}
         </Select>
       </Form.Item>
 

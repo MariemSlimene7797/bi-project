@@ -20,7 +20,8 @@ const FormReport: React.FC<FormReportProps> = () => {
     setIsModalVisible(false);
 
     console.log(categoryItem);
-    AddcategorytoList;
+    AddcategorytoList(categoryItem);
+
     console.log('abc');
   };
 
@@ -30,7 +31,7 @@ const FormReport: React.FC<FormReportProps> = () => {
   const handleSelectionCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
     //value of context should change according to argument 'e'
 
-    setcategoryItem({ ...categoryItem, CategoryName: e.target.value.toString() });
+    setcategoryItem({ ...categoryItem, categoryname: e.target.value.toString() });
   };
 
   return (
@@ -43,7 +44,7 @@ const FormReport: React.FC<FormReportProps> = () => {
           placeholder="Enter Category Name"
           type="text"
           className="category"
-          value={categoryItem.CategoryName}
+          value={categoryItem.categoryname}
           onChange={handleSelectionCategory}
         />
       </Modal>
