@@ -59,7 +59,6 @@ const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
     };
 
     console.log('Updated values of form:', report);
-    AddReport(report);
   };
 
   const { t } = useTranslation();

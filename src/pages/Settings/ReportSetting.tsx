@@ -1,62 +1,67 @@
-import React, { useContext } from 'react';
-import { Form, Select, Space } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Form, message, Select, Space } from 'antd';
 
 import { Button, Input } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
-import { AddReport } from '../../Services/ReportingService';
-import { CategoryReportcontexts } from '../../contexts/CategoryReport';
+import { AddReport, AddReportDto } from '../../Services/ReportingService';
+import { useCategoryReportcontexts } from '../../contexts/CategoryReport';
+import { CategoryDto, getAllCategories } from '../../Services/CategoryService';
 
 /**realisation of the new procedure form in the settings page */
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ReportSettingsProps {}
-
-type ReportType = {
-  key: React.Key;
-  name: string;
-  inputParameters: InputType[];
-  category: string;
-};
-/** strongly typed object */
-enum FormItems {
-  name = 'Name',
-  category = 'Category',
-  inputParameters = 'inputParameters'
-}
-
-interface InputType {
-  key: React.Key;
-  value: string;
-  name: string;
-}
-
 const ReportSettings: React.FC<ReportSettingsProps> = () => {
+  const [categoryList, setCategoryList] = useState<CategoryDto[]>();
+  /** strongly typed object */
+  enum FormItems {
+    name = 'name',
+    category = 'category',
+    inputParameters = 'inputParameters'
+  }
+
+  interface InputType {
+    key: React.Key;
+    value: string;
+    name: string;
+  }
+
   const onFinish = (values: any) => {
     console.log('Received values of form:', values);
     // add new report logic
     const inputParameters = values.inputParameters.map((param: any) => {
       return {
-        parameterSide: 0,
         name: param.name,
         parameterType: +param.type,
         required: true
       };
     });
 
-    const Report = {
+    const Report: AddReportDto = {
       name: values.name,
+      categoryId: values.category,
       description: 'react Test data',
-      parameters: [...inputParameters],
-      category: 'bi'
+      parameters: [...inputParameters]
     };
 
     console.log('Updated values of form:', Report);
-    //  AddReport(Report);
+    AddReport(Report).then((res) => {
+      res === true ? message.success('Report Added successfully') : message.error('Error while adding report');
+    });
   };
-  const { categoryList } = React.useContext(CategoryReportcontexts);
 
   const { t } = useTranslation();
+
+  useEffect(() => {
+    getAllCategories()
+      .then((res) => {
+        setCategoryList(res);
+        console.log('categories', res);
+      })
+      .catch((err) => console.log('cant get category data', err));
+  }, []);
+
   return (
     <Form name="New Report" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }} onFinish={onFinish} autoComplete="on">
       <Form.Item
@@ -69,15 +74,16 @@ const ReportSettings: React.FC<ReportSettingsProps> = () => {
       </Form.Item>
       <Form.Item
         label="Category Report"
-        name={FormItems.name}
+        name={FormItems.category}
         rules={[{ required: true, message: 'Category Name Missing' }]}
       >
-        <Select placeholder="Category" style={{ width: '150px' }}>
-          {categoryList.map((categoryname, categoryKey) => (
-            <div key={categoryKey}>
-              <Select.Option>{categoryname}</Select.Option>
-            </div>
-          ))}
+        <Select placeholder="Category" style={{ width: '150px' }} defaultValue={categoryList && categoryList[0]}>
+          {categoryList &&
+            categoryList.map((el, key) => (
+              <Select.Option key={key} value={el.categoryId}>
+                {el.name}
+              </Select.Option>
+            ))}
         </Select>
       </Form.Item>
 

@@ -11,20 +11,16 @@ export const getReportById = async (id: string): Promise<spType> => {
   return axios.get<spType>(`https://localhost:7215/api/StoredProcedure/id?id=${id}`).then((res) => res.data);
 };
 
-type spAddType = {
+export type AddReportDto = {
   name: string;
+  categoryId: string;
   description: string;
   parameters: {
-    parameterSide: number;
     name: string;
     parameterType: number;
     required: boolean;
   }[];
-  insertDateTime: string;
-  updateDateTime: string;
 };
-export const AddReport = async (param: spAddType): Promise<boolean> => {
-  return axios
-    .post('https://localhost:7215/api/StoredProcedure/add', param)
-    .then((res) => (res.status == 200 ? true : false));
+export const AddReport = async (param: AddReportDto): Promise<boolean> => {
+  return axios.post('https://localhost:7215/api/Report/add', param).then((res) => (res.status == 200 ? true : false));
 };

@@ -21,25 +21,14 @@ import { CategoryElementType, CategoryReportcontexts, useCategoryReportcontexts 
   }, {} as Record<K, T[]>);
 
 /**the type of list originally transferred to the interface */
-type siderDataType = {
-  id: number;
-  name: string;
-  category: string;
-};
-/**example of the elements that are supposed to be transferred to the interface */
-const siderData: siderDataType[] = [
-  { id: 0, name: 'Report 1', category: 'Bourse' },
-  { id: 1, name: 'Report 2', category: 'CRM' },
-  { id: 2, name: 'Report 3', category: 'Direction Generale' },
-  { id: 3, name: 'Report 4', category: 'CRM' }
-];
-const FavList: siderDataType[] = [];
+
+//const FavList: siderDataType[] = [];
 //
 
 /**the FC that inserted the items of the Report Sider */
 const SiderReport: React.FC = () => {
   /**the collapsed button */
-  const { categoryList } = React.useContext(CategoryReportcontexts);
+  const { categoryList } = useCategoryReportcontexts();
   const { collapsed } = useLayoutContext();
   /**list of the categories */
   /*const results = groupBy(siderData, (i) => i.category);
@@ -76,22 +65,26 @@ const SiderReport: React.FC = () => {
   });*/
 
   return (
-    <Layout.Sider style={siderStyle} theme="light" trigger={null}>
-      <>
-        <Menu
-          theme="light"
-          mode="inline"
-          selectable={true}
-          items={categoryList as any}
-          style={SiderItemStyle}
-          //onClick={handleClick}
-        />
-        <FormReport />
-      </>
-    </Layout.Sider>
+    <>
+      <Layout.Sider style={siderStyle} theme="light" trigger={null} collapsible collapsed={collapsed}>
+        <>
+          <Menu theme="light" mode="inline" selectable={true} style={SiderItemStyle}>
+            {categoryList.map((el, key) => (
+              <Menu.Item key={el.categoryKey}>{el.categoryname}</Menu.Item>
+            ))}
+          </Menu>
+
+          <FormReport />
+        </>
+      </Layout.Sider>
+    </>
   );
 };
 
 export default SiderReport;
 const siderStyle: React.CSSProperties = { height: '100vh' };
-const SiderItemStyle: React.CSSProperties = { fontSize: '14px', font: 'BlinkMacSystemFont', color: 'black' };
+const SiderItemStyle: React.CSSProperties = {
+  fontSize: '14px',
+  font: 'BlinkMacSystemFont',
+  color: 'black'
+};
