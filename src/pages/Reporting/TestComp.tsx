@@ -1,9 +1,12 @@
+import { Menu } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { getAllReports, getReportById } from '../../Services/ReportingService';
+import { CategoryDto } from './SiderReport';
 
-export type spType = {
-  storedProcedureId: string;
+export type reportType = {
+  reportId: string;
+  categoryId: string;
   name: string;
   description: string;
   parameters: null;
@@ -12,27 +15,26 @@ export type spType = {
 };
 const TestComp: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [reports, setReports] = useState<spType[]>();
-
+  const [reports, setReports] = useState<reportType[]>();
+  const [categoryList, setCategoryList] = useState<CategoryDto[]>();
   useEffect(() => {
     // Get API Data
-    getAllReports().then((res) => {
-      setReports(res);
-      setIsLoading(false);
-    });
+    getAllReports()
+      .then((res) => {
+        setReports(res);
+        console.log('reports', res);
+      })
+      .catch((err) => console.log('cant get reports data', err));
   }, []);
+
   return (
     <>
-      {!isLoading && reports ? (
-        reports.map((el, key) => (
-          <div key={key}>
-            <div>{el.name}</div>
-            <div>{el.description}</div>
-          </div>
-        ))
+      {isLoading && reports ? (
+        reports.map((el, key) => <div key={key}>{el.categoryId}</div>)
       ) : (
         <div> Data is Loading please wait ...</div>
       )}
+      ;
     </>
   );
 };

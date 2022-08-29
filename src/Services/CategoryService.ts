@@ -1,10 +1,5 @@
 import axios from 'axios';
-
-export type CategoryDto = {
-  categoryId: string;
-  name: string;
-  description: string;
-};
+import { CategoryDto } from '../pages/Reporting/SiderReport';
 
 export const getAllCategories = async (): Promise<CategoryDto[]> => {
   return axios.get<CategoryDto[]>('https://localhost:7215/api/Category/all').then((res) => res.data);

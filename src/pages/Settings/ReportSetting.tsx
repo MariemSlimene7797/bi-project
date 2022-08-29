@@ -6,7 +6,8 @@ import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { AddReport, AddReportDto } from '../../Services/ReportingService';
 import { useCategoryReportcontexts } from '../../contexts/CategoryReport';
-import { CategoryDto, getAllCategories } from '../../Services/CategoryService';
+import { getAllCategories } from '../../Services/CategoryService';
+import { CategoryDto } from '../Reporting/SiderReport';
 
 /**realisation of the new procedure form in the settings page */
 
@@ -30,6 +31,7 @@ const ReportSettings: React.FC<ReportSettingsProps> = () => {
   const onFinish = (values: any) => {
     console.log('Received values of form:', values);
     // add new report logic
+    /************************** */
     const inputParameters = values.inputParameters.map((param: any) => {
       return {
         name: param.name,
@@ -44,7 +46,7 @@ const ReportSettings: React.FC<ReportSettingsProps> = () => {
       description: 'react Test data',
       parameters: [...inputParameters]
     };
-
+    /********************* */
     console.log('Updated values of form:', Report);
     AddReport(Report).then((res) => {
       res === true ? message.success('Report Added successfully') : message.error('Error while adding report');

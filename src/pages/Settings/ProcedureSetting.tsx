@@ -34,6 +34,7 @@ const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
   const onFinish = (values: any) => {
     console.log('Received values of form:', values);
     // add new report logic
+    /*********************** */
     const inputParameters = values.inputParameters.map((param: any) => {
       return {
         parameterSide: 0,
@@ -57,7 +58,7 @@ const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
       insertDateTime: '2022-08-06T12:55:25.586Z',
       updateDateTime: '2022-08-06T12:55:25.586Z'
     };
-
+    /************************ */
     console.log('Updated values of form:', report);
   };
 

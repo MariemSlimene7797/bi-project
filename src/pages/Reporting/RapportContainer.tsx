@@ -1,11 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CategoryReportcontexts, useCategoryReportcontexts } from '../../contexts/CategoryReport';
 import { useReportContext } from '../../contexts/ReportContext';
 import { FetchState } from '../../models/types/FetchState';
 import { useGetPosts } from '../../Services/HttpCommunFile';
+import { getAllReports } from '../../Services/ReportingService';
 import RequeteRaport from './RequeteRaport';
 import SiderReport from './SiderReport';
 import TestComp from './TestComp';
+import Testparams from './Testparams';
 
 //import { useGetPosts } from './Services/HttpCommunFile';
 
@@ -13,7 +15,7 @@ import TestComp from './TestComp';
 interface ReportingProps {}
 
 const Reporting: React.FC = () => {
-  const siderData: { id: number; name: string; category: string }[] = [
+  /*const siderData: { id: number; name: string; category: string }[] = [
     { id: 0, name: 'Report 1', category: 'Bourse' },
     { id: 1, name: 'Report 2', category: 'CRM' },
     { id: 2, name: 'Report 3', category: 'Direction Generale' },
@@ -36,12 +38,9 @@ const Reporting: React.FC = () => {
     }
   ];
 
-  const { categoryList } = useCategoryReportcontexts();
-  return (
-    <>
-      <TestComp />
-    </>
-  );
+  const { categoryList } = useCategoryReportcontexts();*/
+
+  return <Testparams />;
 };
 
 export default Reporting;
