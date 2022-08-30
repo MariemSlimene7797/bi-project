@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Form, message, Select, Space } from 'antd';
-
+import { Form, Select, Space } from 'antd';
 import { Button, Input } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
-import { AddReport, AddReportDto } from '../../Services/ReportingService';
-import { useCategoryReportcontexts } from '../../contexts/CategoryReport';
-import { getAllCategories } from '../../Services/CategoryService';
-import { CategoryDto } from '../Reporting/SiderReport';
+import { CategoryDto, getAllCategories } from '../../Services/CategoryService';
 
 /**realisation of the new procedure form in the settings page */
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ReportSettingsProps {}
 const ReportSettings: React.FC<ReportSettingsProps> = () => {
-  const [categoryList, setCategoryList] = useState<CategoryDto[]>();
   /** strongly typed object */
   enum FormItems {
     name = 'name',
@@ -28,6 +23,7 @@ const ReportSettings: React.FC<ReportSettingsProps> = () => {
     name: string;
   }
 
+  const [categoryList, setCategoryList] = useState<CategoryDto[]>();
   const onFinish = (values: any) => {
     console.log('Received values of form:', values);
     // add new report logic
@@ -39,20 +35,20 @@ const ReportSettings: React.FC<ReportSettingsProps> = () => {
         required: true
       };
     });
-
-    const Report: AddReportDto = {
+  };
+  /* const Report:ReportDto[] = {
       name: values.name,
       categoryId: values.category,
       description: 'react Test data',
       parameters: [...inputParameters]
     };
-    /********************* */
+   
     console.log('Updated values of form:', Report);
     AddReport(Report).then((res) => {
       res === true ? message.success('Report Added successfully') : message.error('Error while adding report');
     });
   };
-
+ /********************* */
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -132,5 +128,4 @@ const ReportSettings: React.FC<ReportSettingsProps> = () => {
     </Form>
   );
 };
-
 export default ReportSettings;
