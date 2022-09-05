@@ -9,28 +9,27 @@ import { AddReport } from '../../Services/ReportingService';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ProcedureSettingsProps {}
-
-type ProcedureType = {
-  key: React.Key;
-  name: string;
-  inputParameters?: InputType[];
-  outputParameters: OutputType[];
-};
-/** strongly typed object */
-enum FormItems {
-  name = 'name',
-  inputParameters = 'inputParameters',
-  outputParameters = 'outputParameters'
-}
-
-interface InputType {
-  key: React.Key;
-  value: string;
-  name: string;
-}
-type OutputType = Required<InputType>;
-
 const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
+  type ProcedureType = {
+    key: React.Key;
+    name: string;
+    inputParameters?: InputType[];
+    outputParameters: OutputType[];
+  };
+  /** strongly typed object */
+  enum FormItems {
+    name = 'name',
+    inputParameters = 'inputParameters',
+    outputParameters = 'outputParameters'
+  }
+
+  interface InputType {
+    key: React.Key;
+    value: string;
+    name: string;
+  }
+  type OutputType = Required<InputType>;
+
   const onFinish = (values: any) => {
     console.log('Received values of form:', values);
     // add new report logic

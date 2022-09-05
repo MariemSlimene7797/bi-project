@@ -1,8 +1,8 @@
 import { Menu } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { CategoryDto } from '../../Services/CategoryService';
 import { getAllReports, getReportById } from '../../Services/ReportingService';
-import { CategoryDto } from './SiderReport';
 
 export type reportType = {
   reportId: string;
@@ -17,7 +17,7 @@ const TestComp: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [reports, setReports] = useState<reportType[]>();
   const [categoryList, setCategoryList] = useState<CategoryDto[]>();
-  useEffect(() => {
+  /*  useEffect(() => {
     // Get API Data
     getAllReports()
       .then((res) => {
@@ -25,7 +25,7 @@ const TestComp: React.FC = () => {
         console.log('reports', res);
       })
       .catch((err) => console.log('cant get reports data', err));
-  }, []);
+  }, []);*/
 
   return (
     <>

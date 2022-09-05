@@ -1,17 +1,20 @@
 import axios from 'axios';
+import React from 'react';
 import { reportType } from '../pages/Reporting/TestComp';
 
-export const getAllReports = async (): Promise<reportType[]> => {
-  return axios.get<reportType[]>('https://localhost:7215/api/Report/all').then((res) => res.data);
+export const getAllReports = async (): Promise<ReportDto[]> => {
+  return axios.get<ReportDto[]>('https://localhost:7215/api/Report/all').then((res) => res.data);
 };
 
 // https://localhost:7215/api/StoredProcedure/id?id=337e1fd7-4797-4ffe-adb8-7702a02e1c3d
 
-export const getReportById = async (id: string): Promise<reportType> => {
-  return axios.get<reportType>(`https://localhost:7215/api/Report/id=${id}`).then((res) => res.data);
+export const getReportById = async (id: string): Promise<ReportDto> => {
+  return axios.get<ReportDto>(`https://localhost:7215/api/Report/id=${id}`).then((res) => res.data);
 };
 
-export type AddReportDto = {
+export type ReportDto = {
+  key: React.Key;
+  reportId: string;
   name: string;
   categoryId: string;
   description: string;
@@ -21,7 +24,7 @@ export type AddReportDto = {
     required: boolean;
   }[];
 };
-export const AddReport = async (param: AddReportDto): Promise<boolean> => {
+export const AddReport = async (param: ReportDto): Promise<boolean> => {
   return axios.post('https://localhost:7215/api/Report/add', param).then((res) => (res.status == 200 ? true : false));
 };
 /*

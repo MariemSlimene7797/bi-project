@@ -1,14 +1,16 @@
 import { Button, Input, Modal } from 'antd';
 import React, { useState } from 'react';
 import { CategoryElementType, useCategoryReportcontexts } from '../../contexts/CategoryReport';
+import { AddCategory, CategoryDto } from '../../Services/CategoryService';
 import RapportContainer from './RapportContainer';
+
 /**contains the form of "add category" button */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface FormReportProps {}
+interface FormCategoryProps {}
 
-const FormReport: React.FC<FormReportProps> = () => {
+const FormCategory: React.FC<FormCategoryProps> = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [categoryItem, setcategoryItem] = useState<CategoryElementType>({} as CategoryElementType);
+  const [categoryItem, setcategoryItem] = useState<CategoryDto>({} as CategoryDto);
 
   const { AddcategorytoList } = useCategoryReportcontexts();
 
@@ -20,7 +22,7 @@ const FormReport: React.FC<FormReportProps> = () => {
     setIsModalVisible(false);
 
     console.log(categoryItem);
-    AddcategorytoList(categoryItem);
+    AddCategory(categoryItem);
 
     console.log('abc');
   };
@@ -28,12 +30,16 @@ const FormReport: React.FC<FormReportProps> = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-  const handleSelectionCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSelectionCategoryName = (e: React.ChangeEvent<HTMLInputElement>) => {
     //value of context should change according to argument 'e'
 
-    setcategoryItem({ ...categoryItem, categoryname: e.target.value.toString() });
+    setcategoryItem({ ...categoryItem, name: e.target.value.toString() });
   };
+  const handleSelectionCategoryDesc = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //value of context should change according to argument 'e'
 
+    setcategoryItem({ ...categoryItem, description: e.target.value.toString() });
+  };
   return (
     <>
       <Button type="primary" onClick={showModal} style={ButtonStyle}>
@@ -44,15 +50,22 @@ const FormReport: React.FC<FormReportProps> = () => {
           placeholder="Enter Category Name"
           type="text"
           className="category"
-          value={categoryItem.categoryname}
-          onChange={handleSelectionCategory}
+          value={categoryItem.name}
+          onChange={handleSelectionCategoryName}
+        />
+        <Input
+          placeholder="Enter Category Description"
+          type="text"
+          className="Category"
+          value={categoryItem.description}
+          onChange={handleSelectionCategoryDesc}
         />
       </Modal>
     </>
   );
 };
 
-export default FormReport;
+export default FormCategory;
 const ButtonStyle: React.CSSProperties = {
   backgroundColor: 'white',
   color: '#1890ff',
