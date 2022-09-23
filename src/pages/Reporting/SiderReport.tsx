@@ -5,7 +5,7 @@ import FormCategory from './FormCategory';
 import MenuItem from 'antd/lib/menu/MenuItem';
 import { CategoryDto, getAllCategories } from '../../Services/CategoryService';
 import { ReportDto, getAllReports } from '../../Services/ReportingService';
-import FormReportCreation from './FormReportCreation';
+
 import { useReportingModalContext } from '../../contexts/ReportingModalContext';
 import { MenuInfo } from 'rc-menu/lib/interface';
 
@@ -27,9 +27,6 @@ const SiderReport: React.FC = () => {
         console.log('categories', res);
       })
       .catch((err) => console.log('cant get category data', err));
-  }, []);
-
-  useEffect(() => {
     getAllReports()
       .then((rep) => {
         setReports(rep);

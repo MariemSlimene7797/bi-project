@@ -1,8 +1,8 @@
-import { Button, Input, Modal } from 'antd';
+import { Button, Form, Input, message, Modal } from 'antd';
+import FormItem from 'antd/lib/form/FormItem';
 import React, { useState } from 'react';
 import { CategoryElementType, useCategoryReportcontexts } from '../../contexts/CategoryReport';
 import { AddCategory, CategoryDto } from '../../Services/CategoryService';
-import RapportContainer from './RapportContainer';
 
 /**contains the form of "add category" button */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -12,7 +12,11 @@ const FormCategory: React.FC<FormCategoryProps> = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [categoryItem, setcategoryItem] = useState<CategoryDto>({} as CategoryDto);
 
-  const { AddcategorytoList } = useCategoryReportcontexts();
+  // const { AddcategorytoList } = useCategoryReportcontexts();
+  const info = () => {
+    //condition
+    message.success('new category added');
+  };
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -23,6 +27,7 @@ const FormCategory: React.FC<FormCategoryProps> = () => {
 
     console.log(categoryItem);
     AddCategory(categoryItem);
+    info();
 
     console.log('abc');
   };
@@ -46,20 +51,26 @@ const FormCategory: React.FC<FormCategoryProps> = () => {
         Add Category
       </Button>
       <Modal title="Add Category" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <Input
-          placeholder="Enter Category Name"
-          type="text"
-          className="category"
-          value={categoryItem.name}
-          onChange={handleSelectionCategoryName}
-        />
-        <Input
-          placeholder="Enter Category Description"
-          type="text"
-          className="Category"
-          value={categoryItem.description}
-          onChange={handleSelectionCategoryDesc}
-        />
+        <Form>
+          <FormItem label="Category Name">
+            <Input
+              placeholder="Enter Category Name"
+              type="text"
+              className="category"
+              value={categoryItem.name}
+              onChange={handleSelectionCategoryName}
+            />
+          </FormItem>
+          <FormItem label="Category Description">
+            <Input
+              placeholder="Enter Category Description"
+              type="text"
+              className="Category"
+              value={categoryItem.description}
+              onChange={handleSelectionCategoryDesc}
+            />
+          </FormItem>
+        </Form>
       </Modal>
     </>
   );

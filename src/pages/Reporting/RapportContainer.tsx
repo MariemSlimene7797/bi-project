@@ -1,6 +1,8 @@
 import React from 'react';
 import { useReportingModalContext } from '../../contexts/ReportingModalContext';
-import FormReportCreation from './FormReportCreation';
+
+import ModalParams from './ModalParams';
+import ReportViewerModule from './ReportViewerModule';
 
 //import { useGetPosts } from './Services/HttpCommunFile';
 
@@ -11,7 +13,8 @@ const Reporting: React.FC = () => {
   //console.log(isVisible);
   return (
     <>
-      <FormReportCreation />
+      <ModalParams />
+      <ReportViewerModule />
     </>
   );
 };

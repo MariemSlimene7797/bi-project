@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+import { parametersDto } from '../../Services/ParameterService';
 import { ReportDto } from '../../Services/ReportingService';
 
 interface IReportingModalContext {
@@ -6,6 +7,7 @@ interface IReportingModalContext {
   handleOk: () => void;
   handleCancel: () => void;
   SelectedItem: ReportDto;
+  InsertedValue: parametersDto;
   // handleSelectionPie: (e: React.ChangeEvent<HTMLInputElement>) => void;
   //handleSelectionBar: (e: React.ChangeEvent<HTMLInputElement>) => void;
   //handleSelectionArea: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -17,7 +19,7 @@ export const ReportingModalContext = createContext<IReportingModalContext>({} as
 const ReportingModalContextProvider: React.FC = ({ children }) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   //const [clickedRep, setClickedRep] = useState<string>();
-
+  const [InsertedValue, setInsertedValue] = useState<parametersDto>({} as parametersDto);
   const [SelectedItem, setSelectedItem] = useState<ReportDto>({} as ReportDto);
   const handleOk = () => {
     setIsVisible(false);
@@ -38,7 +40,8 @@ const ReportingModalContextProvider: React.FC = ({ children }) => {
         handleCancel,
         isVisible,
         SelectedItem,
-        handleOpen
+        handleOpen,
+        InsertedValue
       }}
     >
       {children}

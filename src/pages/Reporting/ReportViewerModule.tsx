@@ -14,13 +14,14 @@ const viewerStyle = {
   width: '100%'
 };
 const ReportViewerModule: React.FC = () => {
-  const reportServiceUrl = 'https://localhost:7215/api/ReportViewer';
+  const reportServiceUrl = 'http://localhost:7215/api/ReportViewer';
   // https://help.boldreports.com/report-viewer-sdk/faq/difference-between-report-service-url-and-report-server-url/
   // https://help.boldreports.com/report-viewer-sdk/javascript-reporting/report-viewer/report-service/create-aspnet-core-web-api-service/
-  const reportServerUrl = 'http://desktop-3d2n79g/ReportServer2022'; //ok
-  const reportPath = '~/Resources/test.rdl';
+  const reportServerUrl = 'http://desktop-3d2n79g:80/ReportServer2022'; //ok
+  const reportPath = '/test';
   return (
     <BoldReportViewerComponent
+      style={viewerStyle}
       id="reportviewer-container"
       reportServiceUrl={reportServiceUrl}
       reportPath={reportPath}

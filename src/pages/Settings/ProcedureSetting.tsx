@@ -1,22 +1,27 @@
 import { Form, Select, Space } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Input } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { AddReport } from '../../Services/ReportingService';
+import { ProcedureDto } from '../../Services/ProcedureService';
+import { parametersDto } from '../../Services/ParameterService';
 
 /**realisation of the new procedure form in the settings page */
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ProcedureSettingsProps {}
 const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
-  type ProcedureType = {
+  const [procedureItem, setprocedureItem] = useState<ProcedureDto>({} as ProcedureDto);
+  const [parameterItem, setparameterItem] = useState<parametersDto>({} as parametersDto);
+
+  /* type ProcedureType = {
     key: React.Key;
     name: string;
     inputParameters?: InputType[];
     outputParameters: OutputType[];
   };
-  /** strongly typed object */
+  /** strongly typed object 
   enum FormItems {
     name = 'name',
     inputParameters = 'inputParameters',
@@ -28,13 +33,21 @@ const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
     value: string;
     name: string;
   }
-  type OutputType = Required<InputType>;
+  type OutputType = Required<InputType>;*/
+  const HandleProcedureName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //value of context should change according to argument 'e'
+
+    setprocedureItem({ ...procedureItem, name: e.target.value.toString() });
+  };
+  const HandleParameterInName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setparameterItem({ ...parameterItem, name: e.target.value.toString() });
+  };
 
   const onFinish = (values: any) => {
     console.log('Received values of form:', values);
     // add new report logic
-    /*********************** */
-    const inputParameters = values.inputParameters.map((param: any) => {
+    /*********************** 
+   const inputParameters = values.inputParameters.map((param: any) => {
       return {
         parameterSide: 0,
         name: param.name,
@@ -58,7 +71,6 @@ const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
       updateDateTime: '2022-08-06T12:55:25.586Z'
     };
     /************************ */
-    console.log('Updated values of form:', report);
   };
 
   const { t } = useTranslation();
@@ -66,14 +78,18 @@ const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
     <Form name="New Parameter" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }} onFinish={onFinish} autoComplete="on">
       <Form.Item
         label="Name Procedure"
-        name={FormItems.name}
         rules={[{ required: true, message: 'Name Procedure Missing' }]}
         style={{ marginTop: '50px' }}
       >
-        <Input className="name" placeholder="Insert Name Procedure Here.." />
+        <Input
+          className="name"
+          placeholder="Insert Name Procedure Here.."
+          value={procedureItem.name}
+          onChange={HandleProcedureName}
+        />
       </Form.Item>
 
-      <Form.List name={FormItems.inputParameters}>
+      <Form.List name="input params">
         {(fields, { add, remove }) => (
           <>
             {fields.map(({ key, name, ...restField }) => (
@@ -84,7 +100,13 @@ const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
                   rules={[{ required: true, message: 'Parameter Name Missing' }]}
                   noStyle
                 >
-                  <Input placeholder="Insert Parameter Name" className="name" style={{ marginRight: '100px' }} />
+                  <Input
+                    placeholder="Insert Parameter Name"
+                    className="name"
+                    style={{ marginRight: '100px' }}
+                    value={parameterItem.name}
+                    onChange={HandleParameterInName}
+                  />
                 </Form.Item>
                 <Form.Item
                   {...restField}
@@ -108,7 +130,7 @@ const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
         )}
       </Form.List>
 
-      <Form.List name={FormItems.outputParameters}>
+      <Form.List name="outputparam">
         {(fields, { add, remove }) => (
           <>
             {fields.map(({ key, name, ...restField }) => (

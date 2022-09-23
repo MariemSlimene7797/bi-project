@@ -4,27 +4,27 @@ enum ParameterSide {
   Output
 }
 
-enum ParameterType {
-  CustomerList,
-  AccountList,
-  AccountOwnCategory,
-  DateTimePicker,
-  CheckBox
+export enum TypeOfParameter {
+  CustomerList = 'customer List',
+  AccountList = 'account list',
+  AccountOwnCategory = 'account own category',
+  DateTimePicker = 'date time picker',
+  CheckBox = 'check box'
 }
-export type parametersType = {
+export type parametersDto = {
   parameterId: string;
   parameterSide: ParameterSide;
 
   name: string;
-  parameterType: ParameterType; //
+  parameterType: TypeOfParameter; //
   required: boolean;
   elementId: string;
 
   insertDateTime: string;
   updateDateTime: string;
 };
-export const getAllparameters = async (id: string): Promise<parametersType[]> => {
+export const getAllparameters = async (id: string): Promise<parametersDto[]> => {
   return axios
-    .get<parametersType[]>(`https://localhost:7215/api/Parameter/AllbyId?ElementId=${id}`)
+    .get<parametersDto[]>(`https://localhost:7215/api/Parameter/AllbyId?ElementId=${id}`)
     .then((res) => res.data);
 };
