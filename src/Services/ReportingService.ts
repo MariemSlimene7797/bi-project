@@ -13,12 +13,12 @@ export const getReportById = async (id: string): Promise<ReportDto> => {
 };
 
 export type ReportDto = {
-  key: React.Key;
-  reportId: string;
-  name: string;
-  categoryId: string;
-  description: string;
-  parameters: parametersDto[];
+  // key: React.Key;
+  ReportId: string;
+  Name: string;
+  CategoryId: string;
+  Description: string;
+  Parameters: parametersDto[];
 };
 export const AddReport = async (report: ReportDto): Promise<boolean> => {
   return axios.post('https://localhost:7215/api/Report/add', report).then((res) => (res.status == 200 ? true : false));

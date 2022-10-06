@@ -45,19 +45,19 @@ const SiderReport: React.FC = () => {
                 <SubMenu key={el.categoryId} title={el.name}>
                   {reports ? (
                     reports.map((element, key) => (
-                      <div key={element.reportId}>
-                        {element.categoryId === el.categoryId ? (
-                          <MenuItem onClick={() => handleOpen(element)}>{element.name}</MenuItem>
+                      <div key={element.ReportId}>
+                        {element.CategoryId === el.categoryId ? (
+                          <MenuItem onClick={() => handleOpen(element)}>{element.Name}</MenuItem>
                         ) : undefined}
                       </div>
                     ))
                   ) : (
-                    <div> List of report is here...</div>
+                    <div></div>
                   )}
                 </SubMenu>
               ))
             ) : (
-              <div> List of category is here...</div>
+              <div></div>
             )}
           </Menu>
           <FormCategory />

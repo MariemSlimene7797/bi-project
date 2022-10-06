@@ -1,11 +1,8 @@
-import { DatePicker, DatePickerProps, Form, Input, Space } from 'antd';
+import { DatePicker, DatePickerProps, Form, Space } from 'antd';
 import Checkbox, { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import FormItem from 'antd/lib/form/FormItem';
 import React from 'react';
-import ReactToPrint from 'react-to-print';
 import { useReportingModalContext } from '../../contexts/ReportingModalContext';
-import { parametersDto } from '../../Services/ParameterService';
-import { ReportDto } from '../../Services/ReportingService';
 import AccountInput from './Inputs/AccountInput';
 import CustomerInput from './Inputs/CustomerInput';
 
@@ -31,10 +28,10 @@ const InputParams: React.FC<InputParamsProps> = () => {
           </Space>
         );
       }
-      case 1: {
+      case 0: {
         return <CustomerInput />;
       }
-      case 0: {
+      case 1: {
         return <AccountInput />;
       }
       case 4: {
@@ -46,7 +43,7 @@ const InputParams: React.FC<InputParamsProps> = () => {
   return (
     <>
       {SelectedItem &&
-        SelectedItem.parameters.map((param, key) => (
+        SelectedItem.Parameters.map((param, key) => (
           <Form key={key}>
             <FormItem
               label={param.name}

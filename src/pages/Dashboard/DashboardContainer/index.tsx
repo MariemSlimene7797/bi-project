@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import ReactGridLayout from 'react-grid-layout';
 import { useDashboardContext } from '../../../contexts/DashboardContext';
 import DashCard from './CardDashboard';
+import Content from './Content';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface DashboardContainerProps {}

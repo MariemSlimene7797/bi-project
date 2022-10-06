@@ -1,7 +1,7 @@
 import axios from 'axios';
 enum ParameterSide {
-  Input,
-  Output
+  Input = 0,
+  Output = 1
 }
 
 export enum TypeOfParameter {
@@ -23,7 +23,7 @@ export type parametersDto = {
   insertDateTime: string;
   updateDateTime: string;
 };
-export const getAllparameters = async (id: string): Promise<parametersDto[]> => {
+export const getparametersbyID = async (id: string): Promise<parametersDto[]> => {
   return axios
     .get<parametersDto[]>(`https://localhost:7215/api/Parameter/AllbyId?ElementId=${id}`)
     .then((res) => res.data);

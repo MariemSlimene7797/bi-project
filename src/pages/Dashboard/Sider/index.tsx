@@ -8,18 +8,21 @@ import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import AreaModal from './AreaModal';
 import { useLayoutContext } from '../../../contexts/LayoutContext';
 import { TboxItemType, ToolboxElementType, useDashboardContext } from '../../../contexts/DashboardContext';
+import { useModalContext } from '../../../contexts/ModalContext';
 
 const Sider: React.FC = () => {
+  const [selectedItem, setSelectedItem] = useState<ToolboxElementType>({} as ToolboxElementType);
   const { collapsed } = useLayoutContext();
 
   const { toolboxElements } = useDashboardContext();
 
-  const { isVisible, selectedItem, handleOpen } = useContext(ModalSiderContext);
+  const { isVisible, handelModalState } = useModalContext();
 
   const handleClick = (tboxEl: MenuInfo) => {
     const element = toolboxElements.find((el) => el.key === tboxEl.key);
     if (element != undefined) {
-      handleOpen(element);
+      setSelectedItem(element);
+      handelModalState('open');
     } else {
       message.error('Element is not in toolbox');
     }
@@ -27,9 +30,9 @@ const Sider: React.FC = () => {
 
   /**strongly typed items from TboxItemType*/
   const item: { [K in TboxItemType]?: ReactNode } = {
-    Pie: <PieModal item={selectedItem} isVisible={isVisible} />,
-    Bar: <BarModal item={selectedItem} isVisible={isVisible} />,
-    Area: <AreaModal item={selectedItem} isVisible={isVisible} />
+    Pie: <PieModal isVisible={isVisible} />,
+    Bar: <BarModal isVisible={isVisible} />,
+    Area: <AreaModal isVisible={isVisible} />
   };
 
   /**the sider opens the corresponding modal according to the clicked option in the sider */

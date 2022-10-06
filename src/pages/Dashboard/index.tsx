@@ -1,18 +1,22 @@
 import React, { CSSProperties } from 'react';
 import DashboardContextProvider from '../../contexts/DashboardContext';
+import ModalContextProvider from '../../contexts/ModalContext';
 import ModalSiderContextProvider from '../../contexts/ModalSiderContext';
 import DashboardContainer from './DashboardContainer';
+import Content from './DashboardContainer/Content';
 import Sider from './Sider';
 
 const Dashboard: React.FC = () => {
   return (
     <DashboardContextProvider>
       <ModalSiderContextProvider>
-        <div style={DashboardWrapperStyle}>
-          <Sider />
-
-          <DashboardContainer />
-        </div>
+        <ModalContextProvider>
+          <div style={DashboardWrapperStyle}>
+            <Sider />
+            <Content />
+            {/* <DashboardContainer /> */}
+          </div>
+        </ModalContextProvider>
       </ModalSiderContextProvider>
     </DashboardContextProvider>
   );

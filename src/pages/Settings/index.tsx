@@ -5,7 +5,6 @@ import { useLayoutContext } from '../../contexts/LayoutContext';
 import Sider from '../Dashboard/Sider';
 import ProcedureSettings from './ProcedureSetting';
 import ReportSettings from './ReportSetting';
-import Reporttest from './Reporttest';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface SettingsProps {}

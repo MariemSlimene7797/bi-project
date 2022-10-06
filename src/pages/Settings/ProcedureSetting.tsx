@@ -1,10 +1,10 @@
-import { Form, Select, Space } from 'antd';
+import { Form, message, Select, Space } from 'antd';
 import React, { useState } from 'react';
 import { Button, Input } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
-import { AddReport } from '../../Services/ReportingService';
-import { ProcedureDto } from '../../Services/ProcedureService';
+
+import { AddProcedure, ProcedureDto } from '../../Services/ProcedureService';
 import { parametersDto } from '../../Services/ParameterService';
 
 /**realisation of the new procedure form in the settings page */
@@ -15,25 +15,6 @@ const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
   const [procedureItem, setprocedureItem] = useState<ProcedureDto>({} as ProcedureDto);
   const [parameterItem, setparameterItem] = useState<parametersDto>({} as parametersDto);
 
-  /* type ProcedureType = {
-    key: React.Key;
-    name: string;
-    inputParameters?: InputType[];
-    outputParameters: OutputType[];
-  };
-  /** strongly typed object 
-  enum FormItems {
-    name = 'name',
-    inputParameters = 'inputParameters',
-    outputParameters = 'outputParameters'
-  }
-
-  interface InputType {
-    key: React.Key;
-    value: string;
-    name: string;
-  }
-  type OutputType = Required<InputType>;*/
   const HandleProcedureName = (e: React.ChangeEvent<HTMLInputElement>) => {
     //value of context should change according to argument 'e'
 
@@ -44,39 +25,57 @@ const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
   };
 
   const onFinish = (values: any) => {
-    console.log('Received values of form:', values);
+    //console.log('Received values of form:', values);
     // add new report logic
-    /*********************** 
-   const inputParameters = values.inputParameters.map((param: any) => {
-      return {
-        parameterSide: 0,
-        name: param.name,
-        parameterType: +param.type,
-        required: true
-      };
-    });
-    const outputParameters = values.outputParameters.map((param: any) => {
-      return {
-        parameterSide: 1,
-        name: param.name,
-        parameterType: +param.type,
-        required: true
-      };
-    });
-    const report = {
-      name: values.name,
+
+    const inputParameters: any[] =
+      values.inputParams &&
+      values.inputParams.map((param: any) => {
+        return {
+          parameterSide: 0,
+          name: param.name,
+          parameterType: +param.type,
+          required: true
+        };
+      });
+
+    const outputParameters: any[] =
+      values.outputParams &&
+      values.outputParams.map((param: any) => {
+        return {
+          parameterSide: 1,
+          name: param.name,
+          parameterType: +param.type,
+          required: true
+        };
+      });
+
+    const Procedure: ProcedureDto = {
+      storedProcedureId: values.procedureId,
+      name: values.procedureName,
       description: 'react Test data',
-      parameters: [...inputParameters, ...outputParameters],
+      parameters: [...outputParameters].concat(inputParameters).filter((el) => el != 'undefined'),
       insertDateTime: '2022-08-06T12:55:25.586Z',
       updateDateTime: '2022-08-06T12:55:25.586Z'
     };
-    /************************ */
+    console.log('param', outputParameters);
+    console.log('Procedure:', Procedure);
+    AddProcedure(Procedure).then((res) =>
+      res ? message.success('Procedure added successfully') : message.error('Cannot add procedure')
+    );
   };
 
   const { t } = useTranslation();
   return (
-    <Form name="New Parameter" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }} onFinish={onFinish} autoComplete="on">
+    <Form
+      name="NewStoredProcedure"
+      labelCol={{ span: 8 }}
+      wrapperCol={{ span: 8 }}
+      onFinish={onFinish}
+      autoComplete="on"
+    >
       <Form.Item
+        name="procedureName"
         label="Name Procedure"
         rules={[{ required: true, message: 'Name Procedure Missing' }]}
         style={{ marginTop: '50px' }}
@@ -89,7 +88,7 @@ const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
         />
       </Form.Item>
 
-      <Form.List name="input params">
+      <Form.List name="inputParams">
         {(fields, { add, remove }) => (
           <>
             {fields.map(({ key, name, ...restField }) => (
@@ -116,6 +115,7 @@ const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
                   <Select placeholder="Parameter Type" style={{ width: '150px' }}>
                     <Select.Option value={0}>Int</Select.Option>
                     <Select.Option value={1}>String</Select.Option>
+                    <Select.Option value={2}>Datetime</Select.Option>
                   </Select>
                 </Form.Item>
                 <MinusCircleOutlined onClick={() => remove(name)} />
@@ -130,7 +130,7 @@ const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
         )}
       </Form.List>
 
-      <Form.List name="outputparam">
+      <Form.List name="outputParams">
         {(fields, { add, remove }) => (
           <>
             {fields.map(({ key, name, ...restField }) => (
@@ -151,6 +151,7 @@ const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
                   <Select placeholder="Parameter Type" style={{ width: '150px' }}>
                     <Select.Option value={0}>Int</Select.Option>
                     <Select.Option value={1}>String</Select.Option>
+                    <Select.Option value={2}>Datetime</Select.Option>
                   </Select>
                 </Form.Item>
                 <MinusCircleOutlined onClick={() => remove(name)} />

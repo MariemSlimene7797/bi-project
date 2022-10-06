@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
-    "@boldreports/react-reporting-components": "^4.2.53",
+    "@boldreports/react-reporting-components": "^4.2.54",
     "@craco/craco": "^6.4.3",
     "@devexpress/analytics-core": "^22.1.5",
     "@tolgee/i18next": "^4.5.0",

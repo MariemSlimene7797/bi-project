@@ -9,6 +9,7 @@ interface IModalSiderContext {
   handleOk: () => void;
   handleCancel: () => void;
   selectedItem: ToolboxElementType;
+  updateSelectedItem: (Item: ToolboxElementType) => void;
   handleSelectionPie: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSelectionBar: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSelectionArea: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -51,6 +52,9 @@ const ModalSiderContextProvider: React.FC = ({ children }) => {
     setSelectedItem({ ...selectedItem, title: e.target.value.toString(), tboxItemType: 'Bar' });
   };
 
+  const updateSelectedItem = (Item: ToolboxElementType) => {
+    setSelectedItem(Item);
+  };
   return (
     <ModalSiderContext.Provider
       value={{
@@ -61,6 +65,7 @@ const ModalSiderContextProvider: React.FC = ({ children }) => {
         handleSelectionPie,
         handleSelectionBar,
         handleSelectionArea,
+        updateSelectedItem,
         handleOpen
       }}
     >

@@ -6,7 +6,6 @@ import { useModalSiderContext } from '../../../contexts/ModalSiderContext';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface BarModalProps {
   isVisible: boolean;
-  item: ToolboxElementType;
 }
 
 const BarModal: React.FC<BarModalProps> = ({ isVisible }) => {
