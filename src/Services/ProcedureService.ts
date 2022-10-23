@@ -14,10 +14,10 @@ export const getProcedureById = async (id: string): Promise<ProcedureDto> => {
 export type ProcedureDto = {
   storedProcedureId: string;
   name: string;
-  description: string;
-  parameters: parametersDto[];
-  insertDateTime: string;
-  updateDateTime: string;
+  description?: string;
+  parameters?: parametersDto[];
+  insertDateTime?: string;
+  updateDateTime?: string;
 };
 
 export const AddProcedure = async (procedure: ProcedureDto): Promise<boolean> => {

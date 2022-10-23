@@ -1,7 +1,10 @@
-import { Form, Input, Modal, Select, TreeSelect } from 'antd';
+import { Form, Input, message, Modal, Select, TreeSelect } from 'antd';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useModalContext } from '../../../contexts/ModalContext';
+import { AddComponent, ComponentDto, CompoParamDto } from '../../../Services/ComponentService';
 import { getAllProcedure, ProcedureDto } from '../../../Services/ProcedureService';
+import Content from '../DashboardContainer/Content';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface PieModalProps {
@@ -22,8 +25,9 @@ type dashboardComponentType = {
 const PieModal: React.FC<PieModalProps> = () => {
   const DEFAULT_PIE: pieComponentType = { name: '', type: 'pie' };
   const [pieComponent, setPieComponent] = useState<pieComponentType>(DEFAULT_PIE);
+  // const [pieComponent, setPieComponent] = useState<pieComponentType[]>();
   const { isVisible, handelModalState } = useModalContext();
-  const [StoredPList, setStoredPList] = useState<ProcedureDto[]>();
+  const [StoredPList, setStoredPList] = useState<ProcedureDto[]>([] as ProcedureDto[]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const handleSelectProc = async (spId: string) => {
@@ -40,22 +44,39 @@ const PieModal: React.FC<PieModalProps> = () => {
     }
   };
 
+  const getParamList = (params: string[]) => {
+    return StoredPList.find((sp) => sp.storedProcedureId === pieComponent.storedProcedure?.id)
+      ?.parameters?.filter((param) => params.includes(param.parameterId))
+      .map((el) => el.parameterId);
+  };
   const handleSelectParams = (params: string[]) => {
     setPieComponent({
       ...pieComponent,
       storedProcedure: {
         ...pieComponent.storedProcedure,
-        paramIdList: StoredPList?.find((sp) => sp.storedProcedureId === pieComponent.storedProcedure?.id)
-          ?.parameters.filter((param) => params.includes(param.parameterId))
-          .map((el) => el.parameterId)
+        paramIdList: getParamList(params)
       }
     });
   };
 
-  const handleOk = () => {
+  const handleOk = async () => {
+    const PieComponent: Omit<ComponentDto, 'componentId'> = {
+      name: pieComponent.name,
+      type: 0,
+      storedPId: pieComponent.storedProcedure?.id,
+      storedPName: pieComponent.storedProcedure?.name,
+      compoParams: pieComponent.storedProcedure?.paramIdList
+    };
+
     handelModalState('close');
     console.log('data', pieComponent);
     setPieComponent(DEFAULT_PIE);
+    console.log('piecomp', PieComponent);
+
+    AddComponent(PieComponent).then((res) =>
+      res ? message.success('Component added successfully') : message.error('Cannot add component')
+    );
+    <Content />;
   };
   const handleCancel = () => {
     handelModalState('close');
@@ -112,8 +133,8 @@ const PieModal: React.FC<PieModalProps> = () => {
               onChange={handleSelectParams}
             >
               {pieComponent.storedProcedure?.id &&
-                StoredPList?.find((el) => el.storedProcedureId === pieComponent.storedProcedure?.id)
-                  ?.parameters.filter((el) => el.parameterSide === 1)
+                StoredPList.find((el) => el.storedProcedureId === pieComponent.storedProcedure?.id)
+                  ?.parameters?.filter((el) => el.parameterSide === 1)
                   .map((el) => <TreeSelect.TreeNode title={el.name} value={el.parameterId} key={el.parameterId} />)}
             </TreeSelect>
           </Form.Item>

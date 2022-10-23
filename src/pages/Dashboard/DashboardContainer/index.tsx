@@ -1,3 +1,4 @@
+import { Card } from 'antd';
 import React, { useContext } from 'react';
 import ReactGridLayout from 'react-grid-layout';
 import { useDashboardContext } from '../../../contexts/DashboardContext';
@@ -18,13 +19,7 @@ const DashboardContainer: React.FC<DashboardContainerProps> = () => {
       isDraggable
       width={1300}
       preventCollision
-    >
-      {dashboardElements.map((el, key) => (
-        <div key={key} data-grid={el.gridLayout}>
-          <DashCard key={key} element={el} />
-        </div>
-      ))}
-    </ReactGridLayout>
+    ></ReactGridLayout>
   );
 };
 export default DashboardContainer;
@@ -37,3 +32,8 @@ const DashboardContainerStyles: React.CSSProperties = {
   flexDirection: 'row',
   overflow: 'scroll'
 };
+/* {dashboardElements.map((el, key) => (
+        <div key={key} data-grid={el.gridLayout}>
+          <DashCard key={key} element={el} />
+        </div>
+      ))}*/

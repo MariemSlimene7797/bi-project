@@ -3,6 +3,7 @@ import React from 'react';
 import { DashboardElementType } from '../../../contexts/DashboardContext';
 import AreaChartTool from './AreaChartTool';
 import BarChartTool from './BarChartTool';
+import PieChartComponent from './DashboardComponents/PieChartComponent';
 import PieChartTool from './PieChartTool';
 
 interface SiderItemProps extends CardProps {

@@ -1,6 +1,6 @@
 import { pieComponentType } from '../../Sider/PieModal';
 
-export const data: Required<pieComponentType>[] = [
+/*export const data1: Required<pieComponentType>[] = [
   {
     name: 'test1',
     type: 'pie',
@@ -16,4 +16,4 @@ export const data: Required<pieComponentType>[] = [
     type: 'pie',
     storedProcedure: { id: 'b6061601-a5a0-4d40-a3bf-sdfsdf', name: 'GetAccounts', paramIdList: ['1', '2', '3'] }
   }
-];
+];*/

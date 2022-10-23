@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Cell, Pie, PieChart } from 'recharts';
+import { ComponentDto } from '../../../../Services/ComponentService';
 import { getData } from '../../../../Services/DataService';
 import { pieComponentType } from '../../Sider/PieModal';
+/**this represents the structure of the pie that will be used in Content */
 
-type DataType = {
+export type DataType = {
   name: string;
   value: number;
 };
+/**datatype.name is the name of the parameter inside the procedure and the component */
 
 interface PieChartComponentProps {
-  componentInfo: Required<pieComponentType>;
+  componentInfo: ComponentDto;
+  //componentInfo: ComponentDto;
 }
 
 const PieStyle: React.CSSProperties = { display: 'flex', height: '400', width: '400' };
@@ -32,9 +36,10 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 
 const PieChartComponent: React.FC<PieChartComponentProps> = ({ componentInfo }) => {
   const [data, setData] = useState<DataType[]>();
+
   useEffect(() => {
     getData<DataType[]>({
-      name: componentInfo.storedProcedure.name as string,
+      name: componentInfo.storedPName as string,
       paramList: [
         {
           name: 'LanguageKey',

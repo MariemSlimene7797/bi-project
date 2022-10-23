@@ -1,6 +1,7 @@
 import { PieChartOutlined, BarChartOutlined, AreaChartOutlined, TableOutlined, FundOutlined } from '@ant-design/icons';
 import React, { createContext, useContext, useState } from 'react';
 import { ReactGridLayoutProps } from 'react-grid-layout';
+import { useTranslation } from 'react-i18next';
 
 export type TboxItemType = 'Pie' | 'Bar' | 'Area' | 'Table' | 'Stat';
 /**type of elements in both Dashboard List and Toolbox List */
@@ -38,60 +39,62 @@ interface IDashboardContext {
   DeleteToolboxElement: (el: ToolboxElementType) => void;
 }
 
-/**values of elements of toolbox list */
-const TBOX_ELEMENTS: ToolboxElementType[] = [
-  {
-    itemID: '0',
-    key: '0',
-    icon: <PieChartOutlined />,
-    label: 'Pie Chart',
-    title: '',
-    tboxItemType: 'Pie',
-    gridLayout: { x: 0, y: 0, w: 5, h: 2 }
-  },
-  {
-    itemID: '1',
-    key: '1',
-    icon: <BarChartOutlined />,
-    label: 'Bar Chart',
-    title: '',
-    tboxItemType: 'Bar',
-    gridLayout: { x: 0, y: 0, w: 5, h: 3.5 }
-  },
-  {
-    itemID: '2',
-    key: '2',
-    icon: <AreaChartOutlined />,
-    label: 'Area Chart',
-    title: '',
-    tboxItemType: 'Area',
-    gridLayout: { x: 0, y: 0, w: 5, h: 3.5 }
-  },
-  {
-    itemID: '3',
-    key: '3',
-    icon: <TableOutlined />,
-    label: 'Data Table',
-    title: '',
-    tboxItemType: 'Table',
-    gridLayout: { x: 0, y: 0, w: 5, h: 2 }
-  },
-  {
-    itemID: '4',
-    key: '4',
-    icon: <FundOutlined />,
-    label: 'Statistic Card',
-    title: '',
-    tboxItemType: 'Stat',
-    gridLayout: { x: 0, y: 0, w: 5, h: 2 }
-  }
-];
-
 /**context creation */
 const DashboardContext = createContext<IDashboardContext>({} as IDashboardContext);
 const DashboardContextProvider: React.FC = ({ children }) => {
+  const { t } = useTranslation();
+  /**values of elements of toolbox list */
+  const TBOX_ELEMENTS: ToolboxElementType[] = [
+    {
+      itemID: '0',
+      key: '0',
+      icon: <PieChartOutlined />,
+      label: t('Pie_Chart'),
+      title: '',
+      tboxItemType: 'Pie',
+      gridLayout: { x: 0, y: 0, w: 5, h: 2 }
+    },
+    {
+      itemID: '1',
+      key: '1',
+      icon: <BarChartOutlined />,
+      label: t('Bar_Chart'),
+      title: '',
+      tboxItemType: 'Bar',
+      gridLayout: { x: 0, y: 0, w: 5, h: 3.5 }
+    },
+    {
+      itemID: '2',
+      key: '2',
+      icon: <AreaChartOutlined />,
+      label: t('Area_Chart'),
+      title: '',
+      tboxItemType: 'Area',
+      gridLayout: { x: 0, y: 0, w: 5, h: 3.5 }
+    },
+    {
+      itemID: '3',
+      key: '3',
+      icon: <TableOutlined />,
+      label: t('Data_Table'),
+      title: '',
+      tboxItemType: 'Table',
+      gridLayout: { x: 0, y: 0, w: 5, h: 2 }
+    },
+    {
+      itemID: '4',
+      key: '4',
+      icon: <FundOutlined />,
+      label: t('Statistic_Card'),
+      title: '',
+      tboxItemType: 'Stat',
+      gridLayout: { x: 0, y: 0, w: 5, h: 2 }
+    }
+  ];
+
   const [dashboardElements, setDashboardElements] = useState<DashboardElementType[]>([]);
   const [toolboxElements, setToolboxElements] = useState<ToolboxElementType[]>(TBOX_ELEMENTS);
+
   const AddDashboardElement = (el: DashboardElementType) => {
     console.log(dashboardElements);
     setDashboardElements([...dashboardElements, el]);

@@ -14,14 +14,12 @@ export enum TypeOfParameter {
 export type parametersDto = {
   parameterId: string;
   parameterSide: ParameterSide;
-
   name: string;
   parameterType: TypeOfParameter; //
   required: boolean;
-  elementId: string;
-
-  insertDateTime: string;
-  updateDateTime: string;
+  elementId?: string;
+  insertDateTime?: string;
+  updateDateTime?: string;
 };
 export const getparametersbyID = async (id: string): Promise<parametersDto[]> => {
   return axios
