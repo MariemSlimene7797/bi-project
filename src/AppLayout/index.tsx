@@ -20,7 +20,7 @@ const AppLayout: React.FC<AppLayoutProps> = () => {
             <Route exact={el.exact} key={key} path={el.path} component={el.component} />
           ))}
           <Route exact path="/login">
-            <Redirect to="/" />
+            <Redirect to="/dashboard" />
           </Route>
         </LayoutContent>
       </React.Suspense>

@@ -10,7 +10,7 @@ import BarChartComponent from './DashboardComponents/BarChartComponent';
 import PieChartComponent, { DataType } from './DashboardComponents/PieChartComponent';
 import GridLayout from './GridLayout/GridLayout';
 
-const Content: React.FC = () => {
+const Content: React.FC<{ components?: ComponentDto[] }> = ({ components }) => {
   /*const DATA: ComponentDto[] = [
     {
       componentId: '123',
@@ -22,24 +22,24 @@ const Content: React.FC = () => {
     }
   ];*/
 
-  const [componentList, setComponentList] = useState<ComponentDto[]>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  // const [componentList, setComponentList] = useState<ComponentDto[]>();
+  // const [isLoading, setIsLoading] = useState<boolean>(true);
 
   /**list of components
     we will represent the pie chart of each component 
     why list?? we need to represent each element once created */
 
-  useEffect(() => {
-    setIsLoading(true);
-    getAllComponents()
-      .then((res) => {
-        console.log('abc');
-        setComponentList(res);
-        console.log('component', res);
-        setIsLoading(false);
-      })
-      .catch((err) => console.log('cant get component data', err));
-  }, []);
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   getAllComponents()
+  //     .then((res) => {
+  //       console.log('abc');
+  //       setComponentList(res);
+  //       console.log('component', res);
+  //       setIsLoading(false);
+  //     })
+  //     .catch((err) => console.log('cant get component data', err));
+  // }, []);
   /* const chart = (type: number, el: ComponentDto) => {
     switch (type) {
       case 0:
@@ -62,13 +62,15 @@ const Content: React.FC = () => {
 
   return (
     <>
-      {componentList &&
-        componentList.map((el, key) => (
-          <Card key={key} title={el.name} style={CardStyle}>
-            {el.type === 0 && <PieChartComponent componentInfo={el} />}
-            {el.type === 1 && <BarChartComponent componentInfo={el} />}
-            {el.type === 2 && <AreaChartComponent componentInfo={el} />}
-          </Card>
+      {components &&
+        components.map((el, key) => (
+          <div key={el.componentId}>
+            <Card title={el.name} style={CardStyle}>
+              {el.type === 0 && <PieChartComponent componentInfo={el} />}
+              {el.type === 1 && <BarChartComponent componentInfo={el} />}
+              {el.type === 2 && <AreaChartComponent componentInfo={el} />}
+            </Card>
+          </div>
         ))}
     </>
   );

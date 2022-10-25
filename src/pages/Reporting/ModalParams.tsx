@@ -9,7 +9,7 @@ const ModalParams: React.FC = () => {
 
   return (
     <>
-      <Modal title={SelectedItem.Name} visible={isVisible} onOk={handleOk} onCancel={handleCancel}>
+      <Modal title={SelectedItem.name} visible={isVisible} onOk={handleOk} onCancel={handleCancel}>
         <InputParams />
       </Modal>
     </>

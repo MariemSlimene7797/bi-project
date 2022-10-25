@@ -11,7 +11,7 @@ const Navigation: React.FC = () => {
     <Router>
       <Switch>
         <Route exact path="/login">
-          {session?.isAuthenticated ? <Redirect to="/" /> : <Login />}
+          {session?.isAuthenticated ? <Redirect to="/dashboard" /> : <Login />}
         </Route>
         <Route render={() => (session?.isAuthenticated ? <AppLayout /> : <Redirect to="/login" />)} />
       </Switch>

@@ -14,7 +14,7 @@ const Login: React.FC = () => {
   const history = useHistory();
 
   const RedirectTo = () => {
-    history.push('/');
+    history.push('/dashboard');
   };
 
   const handleSubmit = async (values: LoginParamsType) => {

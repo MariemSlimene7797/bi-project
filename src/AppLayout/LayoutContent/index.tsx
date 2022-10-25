@@ -19,5 +19,6 @@ const ContentStyle: React.CSSProperties = {
   height: '100%',
   margin: 10,
   display: 'flex',
-  flexDirection: 'column'
+  flexDirection: 'column',
+  overflow: 'auto'
 };

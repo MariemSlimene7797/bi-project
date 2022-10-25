@@ -39,12 +39,12 @@ const FormCategory: React.FC<FormCategoryProps> = () => {
   const handleSelectionCategoryName = (e: React.ChangeEvent<HTMLInputElement>) => {
     //value of context should change according to argument 'e'
 
-    setcategoryItem({ ...categoryItem, Name: e.target.value.toString() });
+    setcategoryItem({ ...categoryItem, name: e.target.value.toString() });
   };
   const handleSelectionCategoryDesc = (e: React.ChangeEvent<HTMLInputElement>) => {
     //value of context should change according to argument 'e'
 
-    setcategoryItem({ ...categoryItem, Description: e.target.value.toString() });
+    setcategoryItem({ ...categoryItem, description: e.target.value.toString() });
   };
   return (
     <>
@@ -58,7 +58,7 @@ const FormCategory: React.FC<FormCategoryProps> = () => {
               placeholder="Enter Category Name"
               type="text"
               className="category"
-              value={categoryItem.Name}
+              value={categoryItem.name}
               onChange={handleSelectionCategoryName}
             />
           </FormItem>
@@ -67,7 +67,7 @@ const FormCategory: React.FC<FormCategoryProps> = () => {
               placeholder="Enter Category Description"
               type="text"
               className="Category"
-              value={categoryItem.Description}
+              value={categoryItem.description}
               onChange={handleSelectionCategoryDesc}
             />
           </FormItem>

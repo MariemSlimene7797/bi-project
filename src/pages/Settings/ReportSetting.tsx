@@ -28,16 +28,16 @@ const ReportSettings: React.FC<ReportSettingsProps> = () => {
   const HandleSelectionName = (e: React.ChangeEvent<HTMLInputElement>) => {
     //value of context should change according to argument 'e'
 
-    setReportItem({ ...reportItem, Name: e.target.value.toString() });
+    setReportItem({ ...reportItem, name: e.target.value.toString() });
   };
   const HandleSelectioncategoryId = (cat: string) => {
     //value of context should change according to argument 'e'
 
-    setReportItem({ ...reportItem, CategoryId: cat });
-    console.log('category', reportItem.CategoryId);
+    setReportItem({ ...reportItem, categoryId: cat });
+    console.log('category', reportItem.categoryId);
   };
   const HandleSelectiondescription = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setReportItem({ ...reportItem, Description: e.target.value.toString() });
+    setReportItem({ ...reportItem, description: e.target.value.toString() });
   };
   const HandleParamName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setparameterItem({ ...parameterItem, name: e.target.value.toString() });
@@ -57,29 +57,26 @@ const ReportSettings: React.FC<ReportSettingsProps> = () => {
   }, []);
 
   const onFinish = (values: any) => {
-    const inputParameters: any[] =
-      values.inputParams &&
-      values.inputParams.map((param: any) => {
+    console.log('values', values);
+    const inputParameters: parametersDto[] =
+      values.parameters &&
+      values.parameters.map((param: { name: string; type: string; required: boolean }) => {
         return {
           parameterSide: 0,
           name: param.name,
-
-          parameterType: +param.type,
-          required: true //param.required
+          parameterType: Object.keys(TypeOfParameter).indexOf(param.type),
+          required: param.required //param.required
         };
       });
     //inputParameters is not read even
-    const Report: ReportDto = {
-      ReportId: values.ReportId,
-
-      Name: values.Name,
-      CategoryId: values.CategoryId,
-      Description: values.Description,
-      Parameters: [parameterItem] //.filter((el) => el != 'undefined')
+    const Report: Omit<ReportDto, 'reportId'> = {
+      name: values.name,
+      categoryId: values.categoryId,
+      description: values.description,
+      parameters: inputParameters //.filter((el) => el != 'undefined')
     };
-    console.log('insertedparam', inputParameters);
-    console.log('insertedvalue', reportItem);
-    console.log('report:', Report);
+
+    console.log('Report', Report);
     AddReport(Report).then((res) =>
       res ? message.success('report added successfully') : message.error('Cannot add report')
     );
@@ -90,7 +87,7 @@ const ReportSettings: React.FC<ReportSettingsProps> = () => {
     <Form name="New Report" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }} onFinish={onFinish} autoComplete="on">
       <Form.Item
         label="Name Report"
-        name="Name"
+        name="name"
         // name={FormItem.name}
         rules={[{ required: true, message: 'Report Name Missing' }]}
         style={{ marginTop: '50px' }}
@@ -98,14 +95,14 @@ const ReportSettings: React.FC<ReportSettingsProps> = () => {
         <Input
           className="name"
           placeholder="Insert Name Report Here.."
-          value={reportItem.Name}
+          value={reportItem.name}
           onChange={HandleSelectionName}
         />
       </Form.Item>
 
       <Form.Item
         label="Category Report"
-        name="CategoryId"
+        name="categoryId"
         rules={[{ required: true, message: 'Category Name Missing' }]}
       >
         <Select
@@ -117,25 +114,25 @@ const ReportSettings: React.FC<ReportSettingsProps> = () => {
         >
           {categoryList &&
             categoryList.map((el, key) => (
-              <Select.Option key={key} value={el.CategoryId}>
-                {el.Name}
+              <Select.Option key={key} value={el.categoryId}>
+                {el.name}
               </Select.Option>
             ))}
         </Select>
       </Form.Item>
       <Form.Item
         label="description Report"
-        name="Description"
+        name="description"
         rules={[{ required: true, message: 'Report description Missing' }]}
       >
         <Input
           className="description"
           placeholder="Insert description Report Here.."
-          value={reportItem.Description}
+          value={reportItem.description}
           onChange={HandleSelectiondescription}
         />
       </Form.Item>
-      <Form.List name="inputparams">
+      <Form.List name="parameters">
         {(fields, { add, remove }) => (
           <>
             {fields.map(({ key, name, ...restField }) => (

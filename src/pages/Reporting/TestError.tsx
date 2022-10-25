@@ -41,9 +41,9 @@ const TestError: React.FC = () => {
       <>
         {categoryList ? (
           categoryList.map((element, key) => (
-            <div key={element.CategoryId}>
-              {element.CategoryId === '60d70fb8-09df-4c20-89dd-b96d9a6203d1' ? (
-                <MenuItem>{element.Name}</MenuItem>
+            <div key={element.categoryId}>
+              {element.categoryId === '60d70fb8-09df-4c20-89dd-b96d9a6203d1' ? (
+                <MenuItem>{element.name}</MenuItem>
               ) : (
                 <div>error</div>
               )}

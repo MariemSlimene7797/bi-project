@@ -14,12 +14,25 @@ export const getReportById = async (id: string): Promise<ReportDto> => {
 
 export type ReportDto = {
   // key: React.Key;
-  ReportId: string;
-  Name: string;
-  CategoryId: string;
-  Description: string;
-  Parameters: parametersDto[];
+  reportId: string;
+  name: string;
+  categoryId: string;
+  description: string;
+  parameters: parametersDto[];
 };
-export const AddReport = async (report: ReportDto): Promise<boolean> => {
-  return axios.post('https://localhost:7215/api/Report/add', report).then((res) => (res.status == 200 ? true : false));
+export const AddReport = async (report: Omit<ReportDto, 'reportId'>): Promise<boolean> => {
+  return axios
+    .post('https://localhost:7215/api/Report/add', {
+      name: report.name,
+      categoryId: report.categoryId,
+      description: report.description,
+      parameters: report.parameters.map((el) => {
+        return {
+          name: el.name,
+          parameterType: el.parameterType,
+          required: el.required
+        };
+      })
+    })
+    .then((res) => (res.status == 200 ? true : false));
 };
