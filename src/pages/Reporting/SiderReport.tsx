@@ -42,12 +42,12 @@ const SiderReport: React.FC = () => {
           <Menu theme="light" mode="inline" selectable={false} style={SiderItemStyle}>
             {categoryList &&
               categoryList.map((el, key) => (
-                <SubMenu key={el.CategoryId} title={el.Name}>
+                <SubMenu key={el.categoryId} title={el.name}>
                   {reports &&
                     reports.map((element, key) => (
-                      <div key={element.ReportId}>
-                        {element.CategoryId === el.CategoryId && (
-                          <MenuItem onClick={() => handleOpen(element)}>{element.Name}</MenuItem>
+                      <div key={element.reportId}>
+                        {element.categoryId === el.categoryId && (
+                          <MenuItem onClick={() => handleOpen(element)}>{element.name}</MenuItem>
                         )}
                       </div>
                     ))}
