@@ -1,14 +1,17 @@
 import { Card } from 'antd';
 import { type } from 'jquery';
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { getAllCategories } from '../../../Services/CategoryService';
 import { ComponentDto, getAllComponents, getComponentsbyID } from '../../../Services/ComponentService';
 import { getData } from '../../../Services/DataService';
 import { pieComponentType } from '../Sider/PieModal';
+import AreaChartComponent from './DashboardComponents/AreaChartComponent';
+import BarChartComponent from './DashboardComponents/BarChartComponent';
 import PieChartComponent, { DataType } from './DashboardComponents/PieChartComponent';
+import GridLayout from './GridLayout/GridLayout';
 
 const Content: React.FC = () => {
-  const DATA: ComponentDto[] = [
+  /*const DATA: ComponentDto[] = [
     {
       componentId: '123',
       name: 'GetAccounts',
@@ -17,16 +20,16 @@ const Content: React.FC = () => {
       storedPName: 'GetAccounts',
       compoParams: ['1', '2', '3']
     }
-  ];
+  ];*/
 
-  //const [componentList, setComponentList] = useState<ComponentDto[]>();
-  //const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [componentList, setComponentList] = useState<ComponentDto[]>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   /**list of components
     we will represent the pie chart of each component 
     why list?? we need to represent each element once created */
 
-  /*useEffect(() => {
+  useEffect(() => {
     setIsLoading(true);
     getAllComponents()
       .then((res) => {
@@ -36,16 +39,37 @@ const Content: React.FC = () => {
         setIsLoading(false);
       })
       .catch((err) => console.log('cant get component data', err));
-  }, []);*/
+  }, []);
+  /* const chart = (type: number, el: ComponentDto) => {
+    switch (type) {
+      case 0:
+        <PieChartComponent componentInfo={el} />;
+
+        break;
+      case 1:
+        <BarChartComponent componentInfo={el} />;
+
+        break;
+      case 2:
+        <AreaChartComponent componentInfo={el} />;
+
+        break;
+
+      default:
+        break;
+    }
+  };*/
 
   return (
     <>
-      <div>abc</div>
-      {DATA.map((el, key) => (
-        <Card key={key} title={el.name} style={CardStyle}>
-          <PieChartComponent componentInfo={el} />
-        </Card>
-      ))}
+      {componentList &&
+        componentList.map((el, key) => (
+          <Card key={key} title={el.name} style={CardStyle}>
+            {el.type === 0 && <PieChartComponent componentInfo={el} />}
+            {el.type === 1 && <BarChartComponent componentInfo={el} />}
+            {el.type === 2 && <AreaChartComponent componentInfo={el} />}
+          </Card>
+        ))}
     </>
   );
 };
@@ -58,4 +82,5 @@ const CardStyle: React.CSSProperties = { width: '100%', height: '100%', borderCo
             <PieChartComponent componentInfo={el} />
           </Card>
         
-        ))}*/
+        ))}
+             */

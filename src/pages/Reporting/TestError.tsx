@@ -8,8 +8,9 @@ import { ReportDto, getAllReports } from '../../Services/ReportingService';
 
 import { useReportingModalContext } from '../../contexts/ReportingModalContext';
 import { MenuInfo } from 'rc-menu/lib/interface';
+import { Categories } from 'devexpress-reporting/dx-webdocumentviewer';
 
-const SiderReport: React.FC = () => {
+const TestError: React.FC = () => {
   const { collapsed } = useLayoutContext();
   const { SubMenu } = Menu;
   const [reports, setReports] = useState<ReportDto[]>();
@@ -36,32 +37,27 @@ const SiderReport: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <Layout.Sider style={siderStyle} theme="light" trigger={null} collapsible collapsed={collapsed}>
-        <>
-          <Menu theme="light" mode="inline" selectable={false} style={SiderItemStyle}>
-            {categoryList &&
-              categoryList.map((el, key) => (
-                <SubMenu key={el.CategoryId} title={el.Name}>
-                  {reports &&
-                    reports.map((element, key) => (
-                      <div key={element.ReportId}>
-                        {element.CategoryId === el.CategoryId && (
-                          <MenuItem onClick={() => handleOpen(element)}>{element.Name}</MenuItem>
-                        )}
-                      </div>
-                    ))}
-                </SubMenu>
-              ))}
-          </Menu>
-          <FormCategory />
-        </>
-      </Layout.Sider>
-    </>
+    <Menu>
+      <>
+        {categoryList ? (
+          categoryList.map((element, key) => (
+            <div key={element.CategoryId}>
+              {element.CategoryId === '60d70fb8-09df-4c20-89dd-b96d9a6203d1' ? (
+                <MenuItem>{element.Name}</MenuItem>
+              ) : (
+                <div>error</div>
+              )}
+            </div>
+          ))
+        ) : (
+          <div>abc</div>
+        )}
+      </>
+    </Menu>
   );
 };
 
-export default SiderReport;
+export default TestError;
 const siderStyle: React.CSSProperties = { height: '100vh' };
 const SiderItemStyle: React.CSSProperties = {
   fontSize: '15px',

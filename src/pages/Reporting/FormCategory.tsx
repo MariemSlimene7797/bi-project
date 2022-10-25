@@ -15,7 +15,8 @@ const FormCategory: React.FC<FormCategoryProps> = () => {
   // const { AddcategorytoList } = useCategoryReportcontexts();
   const info = () => {
     //condition
-    message.success('new category added');
+    message.success('new category added', 30);
+    window.location.reload();
   };
 
   const showModal = () => {
@@ -38,12 +39,12 @@ const FormCategory: React.FC<FormCategoryProps> = () => {
   const handleSelectionCategoryName = (e: React.ChangeEvent<HTMLInputElement>) => {
     //value of context should change according to argument 'e'
 
-    setcategoryItem({ ...categoryItem, name: e.target.value.toString() });
+    setcategoryItem({ ...categoryItem, Name: e.target.value.toString() });
   };
   const handleSelectionCategoryDesc = (e: React.ChangeEvent<HTMLInputElement>) => {
     //value of context should change according to argument 'e'
 
-    setcategoryItem({ ...categoryItem, description: e.target.value.toString() });
+    setcategoryItem({ ...categoryItem, Description: e.target.value.toString() });
   };
   return (
     <>
@@ -57,7 +58,7 @@ const FormCategory: React.FC<FormCategoryProps> = () => {
               placeholder="Enter Category Name"
               type="text"
               className="category"
-              value={categoryItem.name}
+              value={categoryItem.Name}
               onChange={handleSelectionCategoryName}
             />
           </FormItem>
@@ -66,7 +67,7 @@ const FormCategory: React.FC<FormCategoryProps> = () => {
               placeholder="Enter Category Description"
               type="text"
               className="Category"
-              value={categoryItem.description}
+              value={categoryItem.Description}
               onChange={handleSelectionCategoryDesc}
             />
           </FormItem>

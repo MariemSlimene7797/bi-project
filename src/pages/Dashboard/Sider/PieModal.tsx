@@ -69,14 +69,15 @@ const PieModal: React.FC<PieModalProps> = () => {
     };
 
     handelModalState('close');
+
     console.log('data', pieComponent);
     setPieComponent(DEFAULT_PIE);
     console.log('piecomp', PieComponent);
 
     AddComponent(PieComponent).then((res) =>
-      res ? message.success('Component added successfully') : message.error('Cannot add component')
+      res ? message.success('Component added successfully', 30) : message.error('Cannot add component')
     );
-    <Content />;
+    window.location.reload();
   };
   const handleCancel = () => {
     handelModalState('close');

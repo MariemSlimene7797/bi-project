@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 export type CategoryDto = {
-  categoryId: string;
-  name: string;
-  description: string;
+  CategoryId: string;
+  Name: string;
+  Description: string;
 };
 
 export const getAllCategories = async (): Promise<CategoryDto[]> => {

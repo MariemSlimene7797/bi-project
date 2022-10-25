@@ -72,6 +72,7 @@ const PieModal: React.FC<AreaModalProps> = () => {
     AddComponent(AreaComponent).then((res) =>
       res ? message.success('Component added successfully') : message.error('Cannot add component')
     );
+    window.location.reload();
   };
   const handleCancel = () => {
     handelModalState('close');
@@ -89,7 +90,7 @@ const PieModal: React.FC<AreaModalProps> = () => {
   }, []);
   return (
     <>
-      <Modal title="Pie Form" visible={isVisible} onOk={handleOk} onCancel={handleCancel}>
+      <Modal title="Area Form" visible={isVisible} onOk={handleOk} onCancel={handleCancel}>
         <Form>
           <Form.Item label="Chart Name">
             <Input

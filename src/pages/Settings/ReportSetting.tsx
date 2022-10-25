@@ -117,8 +117,8 @@ const ReportSettings: React.FC<ReportSettingsProps> = () => {
         >
           {categoryList &&
             categoryList.map((el, key) => (
-              <Select.Option key={key} value={el.categoryId}>
-                {el.name}
+              <Select.Option key={key} value={el.CategoryId}>
+                {el.Name}
               </Select.Option>
             ))}
         </Select>

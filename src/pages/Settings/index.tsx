@@ -14,7 +14,9 @@ interface SettingsProps {}
 const Settings: React.FC<SettingsProps> = () => {
   return (
     <>
-      <Card style={CardStyle} title="Stored Procedure Structure"></Card>
+      <Card style={CardStyle} title="Stored Procedure Structure">
+        <ProcedureSettings />
+      </Card>
       <Card style={CardStyle} title="Report Structure">
         <ReportSettings />
       </Card>

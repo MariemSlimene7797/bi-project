@@ -81,6 +81,7 @@ const BarModal: React.FC<BarModalProps> = () => {
     AddComponent(BarComponent).then((res) =>
       res ? message.success('Component added successfully') : message.error('Cannot add component')
     );
+    window.location.reload();
   };
   const handleCancel = () => {
     handelModalState('close');

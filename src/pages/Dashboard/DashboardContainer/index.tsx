@@ -4,6 +4,7 @@ import ReactGridLayout from 'react-grid-layout';
 import { useDashboardContext } from '../../../contexts/DashboardContext';
 import DashCard from './CardDashboard';
 import Content from './Content';
+import GridLayout from './GridLayout/GridLayout';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface DashboardContainerProps {}
@@ -15,10 +16,10 @@ const DashboardContainer: React.FC<DashboardContainerProps> = () => {
     <ReactGridLayout
       style={DashboardContainerStyles}
       // isResizable={false}
-      isBounded
-      isDraggable
-      width={1300}
-      preventCollision
+      //isBounded
+      //isDraggable
+      //width={1300}
+      //preventCollision
     ></ReactGridLayout>
   );
 };

@@ -16,7 +16,7 @@ const Dashboard: React.FC = () => {
         <ModalContextProvider>
           <div style={DashboardWrapperStyle}>
             <Sider />
-            <DashboardContainer />
+            <GridLayout />
           </div>
         </ModalContextProvider>
       </ModalSiderContextProvider>
