@@ -5,7 +5,7 @@ import React, { CSSProperties } from 'react';
 interface LayoutFooterProps {}
 
 const LayoutFooter: React.FC<LayoutFooterProps> = () => {
-  return <Layout.Footer style={LayoutFooterStyles}>Intelligencia ©2022 Created by Mariem</Layout.Footer>;
+  return <Layout.Footer style={LayoutFooterStyles}>Intelligencia ©2022 Created by Mariem Slimene</Layout.Footer>;
 };
 
 export default LayoutFooter;

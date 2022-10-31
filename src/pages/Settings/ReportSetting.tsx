@@ -68,7 +68,7 @@ const ReportSettings: React.FC<ReportSettingsProps> = () => {
           required: param.required //param.required
         };
       });
-    //inputParameters is not read even
+
     const Report: Omit<ReportDto, 'reportId'> = {
       name: values.name,
       categoryId: values.categoryId,
@@ -84,7 +84,7 @@ const ReportSettings: React.FC<ReportSettingsProps> = () => {
   const { t } = useTranslation();
 
   return (
-    <Form name="New Report" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }} onFinish={onFinish} autoComplete="on">
+    <Form name="New Report" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }} onFinish={onFinish} autoComplete="off">
       <Form.Item
         label="Name Report"
         name="name"

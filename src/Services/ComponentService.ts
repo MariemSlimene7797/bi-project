@@ -1,7 +1,4 @@
 import axios from 'axios';
-import { idText } from 'typescript';
-import { parametersDto } from './ParameterService';
-import { ProcedureDto } from './ProcedureService';
 export type CompoParamDto = {
   CompoId: string;
   ParamId: string;

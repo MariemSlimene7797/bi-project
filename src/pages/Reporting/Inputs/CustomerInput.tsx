@@ -1,5 +1,4 @@
-import { UserOutlined } from '@ant-design/icons';
-import { Button, Dropdown, Form, Menu, Select, Space } from 'antd';
+import { Form, Select } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { getAllCustomer } from '../../../Services/CustomerService';
 import { CustomerDto } from '../../../Services/CustomerService';
@@ -42,11 +41,3 @@ const MenuOverlay: React.FC = () => {
 };
 
 export default CustomerInput;
-/* <Dropdown overlay={MenuOverlay}>
-      <Button>
-        <Space>
-          {MenuOverlay}
-          <UserOutlined />
-        </Space>
-      </Button>
-    </Dropdown>*/

@@ -103,23 +103,3 @@ const Login: React.FC = () => {
 };
 
 export default Login;
-
-// const styles: {
-//   container: CSSProperties;
-//   content: CSSProperties;
-//   top: CSSProperties;
-//   header: CSSProperties;
-//   logo: CSSProperties;
-//   desc: CSSProperties;
-//   main: CSSProperties;
-//   prefixIcon: CSSProperties;
-// } = {
-//   container: { display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'auto' },
-//   content: {},
-//   top: {},
-//   header: {},
-//   logo: {},
-//   desc: {},
-//   main: {},
-//   prefixIcon: {}
-// };

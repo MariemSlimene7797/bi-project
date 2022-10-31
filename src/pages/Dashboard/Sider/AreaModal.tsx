@@ -19,11 +19,13 @@ type dashboardComponentType = {
   type: 'pie' | 'area' | 'bar';
   storedProcedure?: { id?: string; name?: string; paramIdList?: string[] };
 };
+/**this component will create the component in the database,will attribute to it the sored procedure and
+ * will identify it as an area */
 
-const PieModal: React.FC<AreaModalProps> = () => {
+const AreaModal: React.FC<AreaModalProps> = () => {
   const DEFAULT_AREA: areaComponentType = { name: '', type: 'area' };
   const [areaComponent, setAreaComponent] = useState<areaComponentType>(DEFAULT_AREA);
-  // const [pieComponent, setPieComponent] = useState<pieComponentType[]>();
+
   const { isVisible, handelModalState } = useModalContext();
   const [StoredPList, setStoredPList] = useState<ProcedureDto[]>([] as ProcedureDto[]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -140,4 +142,4 @@ const PieModal: React.FC<AreaModalProps> = () => {
   );
 };
 
-export default PieModal;
+export default AreaModal;

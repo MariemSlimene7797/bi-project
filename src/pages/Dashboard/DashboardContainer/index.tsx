@@ -1,10 +1,6 @@
-import { Card } from 'antd';
-import React, { useContext } from 'react';
+import React from 'react';
 import ReactGridLayout from 'react-grid-layout';
 import { useDashboardContext } from '../../../contexts/DashboardContext';
-import DashCard from './CardDashboard';
-import Content from './Content';
-import GridLayout from './GridLayout/GridLayout';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface DashboardContainerProps {}
@@ -12,16 +8,7 @@ interface DashboardContainerProps {}
 const DashboardContainer: React.FC<DashboardContainerProps> = () => {
   const { dashboardElements } = useDashboardContext();
 
-  return (
-    <ReactGridLayout
-      style={DashboardContainerStyles}
-      // isResizable={false}
-      //isBounded
-      //isDraggable
-      //width={1300}
-      //preventCollision
-    ></ReactGridLayout>
-  );
+  return <ReactGridLayout style={DashboardContainerStyles}></ReactGridLayout>;
 };
 export default DashboardContainer;
 
@@ -33,8 +20,3 @@ const DashboardContainerStyles: React.CSSProperties = {
   flexDirection: 'row',
   overflow: 'scroll'
 };
-/* {dashboardElements.map((el, key) => (
-        <div key={key} data-grid={el.gridLayout}>
-          <DashCard key={key} element={el} />
-        </div>
-      ))}*/

@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react';
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import React from 'react';
+import { PieChart, Pie, Cell } from 'recharts';
 /**source code extracted from recharts that realises the Pie chart  */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 type DATA = {

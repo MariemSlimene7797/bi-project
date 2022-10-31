@@ -13,7 +13,6 @@ export const getReportById = async (id: string): Promise<ReportDto> => {
 };
 
 export type ReportDto = {
-  // key: React.Key;
   reportId: string;
   name: string;
   categoryId: string;

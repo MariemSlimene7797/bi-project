@@ -1,5 +1,5 @@
-import { Layout, Menu, message } from 'antd';
-import React, { useContext, useEffect, useState } from 'react';
+import { Layout, Menu } from 'antd';
+import React, { useEffect, useState } from 'react';
 import { useLayoutContext } from '../../contexts/LayoutContext';
 import FormCategory from './FormCategory';
 import MenuItem from 'antd/lib/menu/MenuItem';
@@ -7,7 +7,6 @@ import { CategoryDto, getAllCategories } from '../../Services/CategoryService';
 import { ReportDto, getAllReports } from '../../Services/ReportingService';
 
 import { useReportingModalContext } from '../../contexts/ReportingModalContext';
-import { MenuInfo } from 'rc-menu/lib/interface';
 
 const SiderReport: React.FC = () => {
   const { collapsed } = useLayoutContext();
@@ -15,7 +14,7 @@ const SiderReport: React.FC = () => {
   const [reports, setReports] = useState<ReportDto[]>();
 
   const [categoryList, setCategoryList] = useState<CategoryDto[]>();
-  // const [isModalVisible, setIsModalVisible] = useState(false);
+
   const { handleOpen } = useReportingModalContext();
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

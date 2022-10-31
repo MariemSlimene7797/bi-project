@@ -72,7 +72,7 @@ const ProcedureSettings: React.FC<ProcedureSettingsProps> = () => {
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 8 }}
       onFinish={onFinish}
-      autoComplete="on"
+      autoComplete="off"
     >
       <Form.Item
         name="procedureName"

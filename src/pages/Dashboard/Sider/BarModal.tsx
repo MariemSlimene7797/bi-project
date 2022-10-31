@@ -20,11 +20,13 @@ type dashboardComponentType = {
   type: 'pie' | 'area' | 'bar';
   storedProcedure?: { id?: string; name?: string; paramIdList?: string[] };
 };
+/**this component will create the component in the database,will attribute to it the sored procedure and
+ * will identify it as a bar */
 
 const BarModal: React.FC<BarModalProps> = () => {
   const DEFAULT_BAR: BarComponentType = { name: '', type: 'bar' };
   const [barComponent, setBarComponent] = useState<BarComponentType>(DEFAULT_BAR);
-  // const [pieComponent, setPieComponent] = useState<pieComponentType[]>();
+
   const { isVisible, handelModalState } = useModalContext();
   const [StoredPList, setStoredPList] = useState<ProcedureDto[]>([] as ProcedureDto[]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -57,14 +59,6 @@ const BarModal: React.FC<BarModalProps> = () => {
       }
     });
   };
-
-  /* const BarComponent: ComponentDto = {
-    ComponentId: '123',
-    Name: barComponent.name,
-    Type: barComponent.type,
-    StoredProcedureId: barComponent.storedProcedure?.id,
-    Parameters: 
-  };*/
 
   const handleOk = () => {
     const BarComponent: Omit<ComponentDto, 'componentId'> = {

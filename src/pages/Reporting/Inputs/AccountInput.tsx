@@ -1,35 +1,42 @@
 import { UserOutlined } from '@ant-design/icons';
-import { Select } from 'antd';
-import React from 'react';
-
+import { Button, Dropdown, Form, Menu, Select, Space } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { getAllCustomer } from '../../../Services/CustomerService';
+import { CustomerDto } from '../../../Services/CustomerService';
+//import { getAllReports } from '../../../Services/ReportingService';
 const AccountInput: React.FC = () => {
-  const data = [
-    { label: '1st menu item', key: '1' },
-    {
-      label: '2nd menu item',
-      key: '2'
-    },
-    {
-      label: '3rd menu item',
-      key: '3'
-    }
-  ];
-
-  const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
-  };
   return (
-    <Select
-      defaultValue={data ? data[0].label : 'cannot get data'}
-      style={{ width: 120 }}
-      onChange={handleChange}
-      suffixIcon={<UserOutlined />}
-    >
-      {data.map((item, key) => (
-        <Select.Option key={key} value={item.key}>
-          {item.label}
-        </Select.Option>
-      ))}
+    <Form>
+      <Form.Item>
+        <MenuOverlay />
+      </Form.Item>
+    </Form>
+  );
+};
+
+const MenuOverlay: React.FC = () => {
+  const [customerItem, setCustomerItem] = useState<CustomerDto[]>();
+  useEffect(() => {
+    getAllCustomer()
+      .then((res) => {
+        setCustomerItem(res);
+        console.log('customer', res);
+      })
+      .catch((err) => console.log('cant get customer data', err));
+  }, []);
+  const handleSelectCustomerId = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('e', e);
+  };
+
+  return (
+    <Select onSelect={handleSelectCustomerId}>
+      {customerItem
+        ? customerItem.map((el, key) => (
+            <Select.Option key={key} value={el.accountNo}>
+              {el.accountNo}
+            </Select.Option>
+          ))
+        : undefined}
     </Select>
   );
 };

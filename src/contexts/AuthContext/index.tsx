@@ -1,4 +1,3 @@
-import { message } from 'antd';
 import React, { createContext, useContext, useState } from 'react';
 import { ISession, LoginParamsType } from '../../models/dtos/Auth.dto';
 

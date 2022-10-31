@@ -10,11 +10,8 @@ import Content from '../DashboardContainer/Content';
 interface PieModalProps {
   isVisible?: boolean;
 }
-/**the modal related to pie chart will show once you click on its card
- * this component contains all the params related to the pie chart.
- * the ok button will show you the chart realised based on the params you provided
- * the provided params are inserted in handleSelectionPie
- */
+/**this component will create the component in the database,will attribute to it the sored procedure and
+ * will identify it as a pie */
 export type pieComponentType = dashboardComponentType & { type: 'pie' };
 type dashboardComponentType = {
   name: string;
@@ -75,7 +72,7 @@ const PieModal: React.FC<PieModalProps> = () => {
     console.log('piecomp', PieComponent);
 
     AddComponent(PieComponent).then((res) =>
-      res ? message.success('Component added successfully', 30) : message.error('Cannot add component')
+      res ? message.success('Component added successfully') : message.error('Cannot add component')
     );
     window.location.reload();
   };

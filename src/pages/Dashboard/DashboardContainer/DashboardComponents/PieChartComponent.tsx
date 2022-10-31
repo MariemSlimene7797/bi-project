@@ -9,7 +9,6 @@ export type DataType = {
   name: string;
   value: number;
 };
-/**datatype.name is the name of the parameter inside the procedure and the component */
 
 interface PieChartComponentProps {
   componentInfo: ComponentDto;

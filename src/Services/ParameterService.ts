@@ -7,7 +7,7 @@ enum ParameterSide {
 export enum TypeOfParameter {
   CustomerList = 'customer List',
   AccountList = 'account list',
-  AccountOwnCategory = 'account own category',
+  //AccountOwnCategory = 'account own category',
   DateTimePicker = 'date time picker',
   CheckBox = 'check box'
 }

@@ -1,7 +1,7 @@
 import { Menu, Segmented } from 'antd';
 import React from 'react';
-import { AppstoreOutlined, BarsOutlined, GlobalOutlined, UserOutlined } from '@ant-design/icons';
-import { Trans, useTranslation } from 'react-i18next';
+import { GlobalOutlined, UserOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import { useLanguageContext } from '../../../contexts/LanguageContext';
 import { useThemeContext } from '../../../contexts/ThemeContext';

@@ -22,17 +22,17 @@ const InputParams: React.FC<InputParamsProps> = () => {
 
   const parameterTypeFonction = (param: parametersDto) => {
     switch (param.parameterType.toString()) {
-      case '0': {
+      case '2': {
         return (
           <Space direction="vertical" size={12}>
             <DatePicker format={dateFormat} onChange={onChangeDate} />
           </Space>
         );
       }
-      case '1': {
+      case '0': {
         return <CustomerInput />;
       }
-      case '2': {
+      case '1': {
         return <AccountInput />;
       }
       case '3': {
