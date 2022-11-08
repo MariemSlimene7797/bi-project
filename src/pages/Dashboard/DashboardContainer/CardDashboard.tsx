@@ -23,6 +23,3 @@ const DashCard: React.FC<SiderItemProps> = ({ element, ...props }) => {
 export default DashCard;
 
 const CardStyle: React.CSSProperties = { width: '100%', height: '100%', borderColor: 'blueviolet', margin: 10 };
-/*const LayoutContent: React.FC<LayoutContentProps> = ({ children }) => {
-  return <Layout.Content style={{ width: '100%', height: '100%' }}>{children}</Layout.Content>;
-};*/
